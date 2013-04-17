@@ -1,0 +1,15 @@
+{
+  "name": "jira-cmd",
+  "version": "0.0.5",
+  "author": "Germán Robledo <germix@germix.net>",
+  "repository": "git://github.com/germix/jira-cmd",
+  "dependencies": {
+    "commander": "~1.1.1",
+    "requirejs": "~2.1.5",
+    "superagent": "~0.13.0",
+    "cli-table": "~0.2.0"
+  },
+  "bin": {
+    "jira": "./bin/jira.js"
+  }
+}
