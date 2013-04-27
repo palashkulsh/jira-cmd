@@ -62,7 +62,7 @@ requirejs([
   program
     .command('running')
     .description('List issues in progress.')
-    .action (function () {
+    .action(function () {
       auth.setConfig(function (auth) {
         if (auth) {
           ls.showInProgress();
@@ -90,7 +90,7 @@ requirejs([
         if (auth) {
           assign.me(issue);
         }
-      })
+      });
     });
 
   program
