@@ -1,6 +1,6 @@
 {
   "name": "jira-cmd",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "author": "Germán Robledo <germix@germix.net>",
   "repository": "git://github.com/germix/jira-cmd",
   "dependencies": {
