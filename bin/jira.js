@@ -14,8 +14,9 @@ requirejs([
   '../lib/jira/describe',
   '../lib/jira/assign',
   '../lib/jira/comment',
+  '../lib/jira/create',
   '../lib/jira/transitions'
-], function (program, config, auth, ls, describe, assign, comment, transitions) {
+], function (program, config, auth, ls, describe, assign, comment, create, transitions) {
 
   program
     .version('v0.0.5');
@@ -120,6 +121,17 @@ requirejs([
           } else {
             describe.show(issue);
           }
+        }
+      });
+    });
+
+  program
+    .command('create')
+    .description('Create an issue or a sub-task')
+    .action(function () {
+      auth.setConfig(function (auth) {
+        if (auth) {
+          create.newIssue();
         }
       });
     });
