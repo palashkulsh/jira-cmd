@@ -38,6 +38,7 @@ This save your credentials (base64 encoded) in your `$HOME/.jira` folder.
     assign <issue>         Assign a issue to me.
     comment <issue> [text] Comment an issue.
     show [options] <issue> Show info about an issue
+    create                 Create an issue or a sub-task
     config [options]       Change configuration
 
   Options:
