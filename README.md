@@ -2,6 +2,7 @@
 
 A Jira command line interface based on [jilla](https://github.com/godmodelabs/jilla).
 
+[![NPM](https://nodei.co/npm/jira-cmd.png?downloads=true&stars=true)](https://nodei.co/npm/jira-cmd/)
 
 ## Installation
 
@@ -9,24 +10,23 @@ Install [node.js](http://nodejs.org/).
 
 Then, in your shell type:
 
-	$ npm install -g jira-cmd
-
+    $ npm install -g jira-cmd
 
 ## Usage
 
 ##### First use
 
-	$ jira
-	Jira URL: https://jira.atlassian.com/
-	Username: xxxxxx
-	Password: xxxxxx
-	Information stored!
+    $ jira
+    Jira URL: https://jira.atlassian.com/
+    Username: xxxxxx
+    Password: xxxxxx
+    Information stored!
 
 This save your credentials (base64 encoded) in your `$HOME/.jira` folder.
 
 ##### Help
 
-	$ jira [options] [command]
+    $ jira [options] [command]
 
   Commands:
 
