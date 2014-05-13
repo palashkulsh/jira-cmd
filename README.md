@@ -34,6 +34,7 @@ This save your credentials (base64 encoded) in your `$HOME/.jira` folder.
     start <issue>          Start working on an issue.
     stop <issue>           Stop working on an issue.
     running                List issues in progress.
+    jql <query>            Run JQL query
     search <term>          Find issues.
     assign <issue>         Assign a issue to me.
     comment <issue> [text] Comment an issue.
