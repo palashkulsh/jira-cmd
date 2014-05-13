@@ -72,6 +72,17 @@ requirejs([
     });
 
   program
+    .command('jql <query>')
+    .description('Run JQL query')
+    .action(function (query) {
+      auth.setConfig(function (auth) {
+        if (auth) {
+          ls.jqlSearch(query);
+        }
+      });
+    });
+
+  program
     .command('search <term>')
     .description('Find issues.')
     .action(function (query) {
