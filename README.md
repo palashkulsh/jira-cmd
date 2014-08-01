@@ -26,17 +26,19 @@ This save your credentials (base64 encoded) in your `$HOME/.jira` folder.
 
 ##### Help
 
-    $ jira [options] [command]
+Usage: jira [options] [command]
 
   Commands:
 
     ls [options]           List my issues
     start <issue>          Start working on an issue.
     stop <issue>           Stop working on an issue.
+    review <issue> [assignee] Mark issue as being reviewed [by assignee(optional)].
+    done <issue>           Mark issue as finnished.
     running                List issues in progress.
     jql <query>            Run JQL query
     search <term>          Find issues.
-    assign <issue>         Assign a issue to me.
+    assign <issue> [user]  Assign an issue to <user>. Provide only issue# to assign to me
     comment <issue> [text] Comment an issue.
     show [options] <issue> Show info about an issue
     create                 Create an issue or a sub-task
@@ -47,9 +49,7 @@ This save your credentials (base64 encoded) in your `$HOME/.jira` folder.
     -h, --help     output usage information
     -V, --version  output the version number
 
-
 Each command have individual usage help (using --help or -h)
-
 
 ## MIT License
 
