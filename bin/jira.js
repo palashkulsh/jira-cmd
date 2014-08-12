@@ -61,6 +61,31 @@ requirejs([
     });
 
   program
+    .command('review <issue> [assignee]')
+    .description('Mark issue as being reviewed [by assignee(optional)].')
+    .action(function (issue, assignee) {
+      auth.setConfig(function (auth) {
+        if (auth) {
+          transitions.review(issue);
+          if(assignee) {
+            assign.to(issue, assignee);
+          }
+        }
+      });
+    });
+
+  program
+    .command('done <issue>')
+    .description('Mark issue as finnished.')
+    .action(function (issue) {
+      auth.setConfig(function (auth) {
+        if (auth) {
+          transitions.done(issue);
+        }
+      });
+    });
+
+  program
     .command('running')
     .description('List issues in progress.')
     .action(function () {
@@ -95,12 +120,16 @@ requirejs([
 
 
   program
-    .command('assign <issue>')
-    .description('Assign a issue to me.')
-    .action(function (issue) {
+    .command('assign <issue> [user]')
+    .description('Assign an issue to <user>. Provide only issue# to assign to me')
+    .action(function (issue, user) {
       auth.setConfig(function (auth) {
         if (auth) {
-          assign.me(issue);
+          if(user) {
+            assign.to(issue, user);
+          } else {
+            assign.me(issue);  
+          }
         }
       });
     });
