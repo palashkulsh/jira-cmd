@@ -30,7 +30,9 @@ requirejs([
     .action(function (options) {
       auth.setConfig(function (auth) {
         if (auth) {
-          if (options.project) {
+          if (options.watching && options.project) {
+            ls.showWatchingByProject(options.project, options.type);
+          } else if (options.project) {
             ls.showByProject(options.project, options.type);
           } else if (options.watching) {
             ls.showAllWatching(options.type);
