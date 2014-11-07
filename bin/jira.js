@@ -55,6 +55,17 @@ requirejs([
     });
 
   program
+    .command('coding <issue>')
+    .description('Start coding an issue.')
+    .action(function (issue) {
+      auth.setConfig(function (auth) {
+        if (auth) {
+          transitions.coding(issue);
+        }
+      });
+    });
+
+  program
     .command('stop <issue>')
     .description('Stop working on an issue.')
     .action(function (issue) {
@@ -75,6 +86,17 @@ requirejs([
           if(assignee) {
             assign.to(issue, assignee);
           }
+        }
+      });
+    });
+
+  program
+    .command('resolve <issue>')
+    .description('Mark issue as resolved.')
+    .action(function (issue) {
+      auth.setConfig(function (auth) {
+        if (auth) {
+          transitions.resolve(issue);
         }
       });
     });
