@@ -26,11 +26,14 @@ requirejs([
     .description('List my issues')
     .option('-p, --project <name>', 'Filter by project', String)
     .option('-t, --type <name>', 'Filter by type', String)
+    .option('-w, --watching',  'List all watched issues by type')
     .action(function (options) {
       auth.setConfig(function (auth) {
         if (auth) {
           if (options.project) {
             ls.showByProject(options.project, options.type);
+          } else if (options.watching) {
+            ls.showAllWatching(options.type);
           } else {
             ls.showAll(options.type);
           }
@@ -128,7 +131,7 @@ requirejs([
           if(user) {
             assign.to(issue, user);
           } else {
-            assign.me(issue);  
+            assign.me(issue);
           }
         }
       });
