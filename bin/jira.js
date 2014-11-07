@@ -81,7 +81,7 @@ requirejs([
 
   program
     .command('done <issue>')
-    .description('Mark issue as finnished.')
+    .description('Mark issue as finished.')
     .action(function (issue) {
       auth.setConfig(function (auth) {
         if (auth) {
