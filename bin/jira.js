@@ -26,11 +26,16 @@ requirejs([
     .description('List my issues')
     .option('-p, --project <name>', 'Filter by project', String)
     .option('-t, --type <name>', 'Filter by type', String)
+    .option('-w, --watching',  'List all watched issues by type')
     .action(function (options) {
       auth.setConfig(function (auth) {
         if (auth) {
-          if (options.project) {
+          if (options.watching && options.project) {
+            ls.showWatchingByProject(options.project, options.type);
+          } else if (options.project) {
             ls.showByProject(options.project, options.type);
+          } else if (options.watching) {
+            ls.showAllWatching(options.type);
           } else {
             ls.showAll(options.type);
           }
@@ -45,6 +50,17 @@ requirejs([
       auth.setConfig(function (auth) {
         if (auth) {
           transitions.start(issue);
+        }
+      });
+    });
+
+  program
+    .command('coding <issue>')
+    .description('Start coding an issue.')
+    .action(function (issue) {
+      auth.setConfig(function (auth) {
+        if (auth) {
+          transitions.coding(issue);
         }
       });
     });
@@ -75,8 +91,19 @@ requirejs([
     });
 
   program
+    .command('resolve <issue>')
+    .description('Mark issue as resolved.')
+    .action(function (issue) {
+      auth.setConfig(function (auth) {
+        if (auth) {
+          transitions.resolve(issue);
+        }
+      });
+    });
+
+  program
     .command('done <issue>')
-    .description('Mark issue as finnished.')
+    .description('Mark issue as finished.')
     .action(function (issue) {
       auth.setConfig(function (auth) {
         if (auth) {
@@ -128,7 +155,7 @@ requirejs([
           if(user) {
             assign.to(issue, user);
           } else {
-            assign.me(issue);  
+            assign.me(issue);
           }
         }
       });
