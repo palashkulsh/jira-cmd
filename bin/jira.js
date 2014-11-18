@@ -15,8 +15,9 @@ requirejs([
   '../lib/jira/assign',
   '../lib/jira/comment',
   '../lib/jira/create',
-  '../lib/jira/transitions'
-], function (program, config, auth, ls, describe, assign, comment, create, transitions) {
+  '../lib/jira/transitions',
+  '../lib/jira/worklog'
+], function (program, config, auth, ls, describe, assign, comment, create, transitions, worklog) {
 
   program
     .version('v0.1.3');
@@ -128,7 +129,7 @@ requirejs([
           if(user) {
             assign.to(issue, user);
           } else {
-            assign.me(issue);  
+            assign.me(issue);
           }
         }
       });
@@ -163,6 +164,35 @@ requirejs([
           }
         }
       });
+    });
+
+  program
+    .command('worklog <issue>')
+    .description('Show worklog about an issue')
+    .action(function (issue) {
+      auth.setConfig(function (auth) {
+        if (auth) {
+          worklog.show(issue);
+        }
+      });
+    });
+
+    program
+    .command('worklogadd <issue> <timeSpent> [comment]')
+    .description('Log work for an issue')
+    .action(function (issue, timeSpent, comment) {
+      auth.setConfig(function (auth) {
+        if (auth) {
+          worklog.add(issue, timeSpent, comment);
+        }
+      });
+    }).on('--help', function () {
+      console.log('  Worklog Add Help:');
+      console.log();
+      console.log('    <issue>: JIRA issue to log work for');
+      console.log('    <timeSpent>: how much time spent (e.g. \'3h 30m\')');
+      console.log('    <comment> (optional) comment');
+      console.log();
     });
 
   program
