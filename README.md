@@ -40,6 +40,8 @@ Usage: jira [options] [command]
     search <term>          Find issues.
     assign <issue> [user]  Assign an issue to <user>. Provide only issue# to assign to me
     comment <issue> [text] Comment an issue.
+    worklog <issue>        View the worklog of an issue.
+    worklogadd <issue> <timeSpent> [comment] Add a new worklog to an issue.
     show [options] <issue> Show info about an issue
     create                 Create an issue or a sub-task
     config [options]       Change configuration
