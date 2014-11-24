@@ -20,7 +20,7 @@ requirejs([
 ], function (program, config, auth, ls, describe, assign, comment, create, transitions, worklog) {
 
   program
-    .version('v0.1.3');
+    .version('v0.2.0');
 
   program
     .command('ls')
@@ -77,7 +77,7 @@ requirejs([
 
   program
     .command('done <issue>')
-    .description('Mark issue as finnished.')
+    .description('Mark issue as finished.')
     .action(function (issue) {
       auth.setConfig(function (auth) {
         if (auth) {
