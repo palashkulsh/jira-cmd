@@ -15,9 +15,10 @@ requirejs([
   '../lib/jira/assign',
   '../lib/jira/comment',
   '../lib/jira/create',
+  '../lib/jira/sprint',
   '../lib/jira/transitions',
   '../lib/jira/worklog'
-], function (program, config, auth, ls, describe, assign, comment, create, transitions, worklog) {
+], function (program, config, auth, ls, describe, assign, comment, create, sprint, transitions, worklog) {
 
   program
     .version('v0.2.0');
@@ -223,6 +224,17 @@ requirejs([
       console.log('    Username: user (for user@foo.bar)');
       console.log('    Password: Your password');
       console.log();
+    });
+
+  program
+    .command('sprint')
+    .description('View the issues in a sprint')
+    .action(function (rapidBoardId, sprintId) {
+      auth.setConfig(function (auth) {
+        if (auth) {
+          sprint(rapidBoardId, sprintId);
+        }
+      });
     });
 
   program.parse(process.argv);
