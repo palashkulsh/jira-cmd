@@ -228,11 +228,18 @@ requirejs([
 
   program
     .command('sprint')
-    .description('View the issues in a sprint')
-    .action(function (rapidBoardId, sprintId) {
+    .description('Works with sprint boards\n' +
+                 'With no arguments, displays all rapid boards\n' +
+                 'With -r argument, attempt to find a single rapid board ' +
+                 'and display its active sprints\nWith both -r and -s arguments ' +
+                 'attempt to get a single sprint board and show its issues. If ' +
+                 'a single sprint board isnt found, show all matching sprint boards')
+    .option('-r, --rapidboard <name>', 'Rapidboard to show sprints for', String)
+    .option('-s, --sprint <name>', 'Sprint to show the issues', String)
+    .action(function (options) {
       auth.setConfig(function (auth) {
         if (auth) {
-          sprint(rapidBoardId, sprintId);
+          sprint(options.rapidboard, options.sprint);
         }
       });
     });
