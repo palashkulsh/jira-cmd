@@ -197,7 +197,7 @@ requirejs([
     });
 
   program
-    .command('create')
+    .command('create [project[-issue]]')
     .description('Create an issue or a sub-task')
     .action(function (projIssue) {
       auth.setConfig(function (auth) {
