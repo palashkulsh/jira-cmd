@@ -167,6 +167,17 @@ requirejs([
     });
 
   program
+    .command('open <issue>')
+    .description('Open an issue in a browser')
+    .action(function (issue, options) {
+      auth.setConfig(function (auth) {
+        if (auth) {
+          describe.open(issue);
+        }
+      });
+    });
+
+  program
     .command('worklog <issue>')
     .description('Show worklog about an issue')
     .action(function (issue) {
