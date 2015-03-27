@@ -4,10 +4,11 @@
   "version": "0.2.0",
   "author": "Germán Robledo <germanrcuriel@gmail.com>",
   "dependencies": {
+    "cli-table": "~0.2.0",
     "commander": "~1.1.1",
+    "openurl": "^1.1.0",
     "requirejs": "~2.1.5",
-    "superagent": "~0.13.0",
-    "cli-table": "~0.2.0"
+    "superagent": "~0.13.0"
   },
   "engines": {
     "node": ">= 0.8"
