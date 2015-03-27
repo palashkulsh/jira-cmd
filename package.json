@@ -1,7 +1,7 @@
 {
   "name": "jira-cmd",
   "description": "Another JIRA Command Line Interface",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "author": "Germán Robledo <germanrcuriel@gmail.com>",
   "dependencies": {
     "cli-table": "~0.2.0",
