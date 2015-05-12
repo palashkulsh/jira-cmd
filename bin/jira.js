@@ -15,9 +15,10 @@ requirejs([
   '../lib/jira/assign',
   '../lib/jira/comment',
   '../lib/jira/create',
+  '../lib/jira/sprint',
   '../lib/jira/transitions',
   '../lib/jira/worklog'
-], function (program, config, auth, ls, describe, assign, comment, create, transitions, worklog) {
+], function (program, config, auth, ls, describe, assign, comment, create, sprint, transitions, worklog) {
 
   program
     .version('v0.2.0');
@@ -234,6 +235,24 @@ requirejs([
       console.log('    Username: user (for user@foo.bar)');
       console.log('    Password: Your password');
       console.log();
+    });
+
+  program
+    .command('sprint')
+    .description('Works with sprint boards\n' +
+                 'With no arguments, displays all rapid boards\n' +
+                 'With -r argument, attempt to find a single rapid board ' +
+                 'and display its active sprints\nWith both -r and -s arguments ' +
+                 'attempt to get a single rapidboard/ sprint and show its issues. If ' +
+                 'a single sprint board isnt found, show all matching sprint boards')
+    .option('-r, --rapidboard <name>', 'Rapidboard to show sprints for', String)
+    .option('-s, --sprint <name>', 'Sprint to show the issues', String)
+    .action(function (options) {
+      auth.setConfig(function (auth) {
+        if (auth) {
+          sprint(options.rapidboard, options.sprint);
+        }
+      });
     });
 
   program.parse(process.argv);
