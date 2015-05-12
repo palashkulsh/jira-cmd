@@ -207,12 +207,12 @@ requirejs([
     });
 
   program
-    .command('create')
+    .command('create [project[-issue]]')
     .description('Create an issue or a sub-task')
-    .action(function () {
+    .action(function (projIssue) {
       auth.setConfig(function (auth) {
         if (auth) {
-          create.newIssue();
+          create.newIssue(projIssue);
         }
       });
     });
