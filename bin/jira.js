@@ -192,10 +192,13 @@ requirejs([
     program
     .command('worklogadd <issue> <timeSpent> [comment]')
     .description('Log work for an issue')
-    .action(function (issue, timeSpent, comment) {
+    .option("-s, --startedAt [value]","Set date of work (default is now)")
+    .action(function (issue, timeSpent, comment, p) {
       auth.setConfig(function (auth) {
         if (auth) {
-          worklog.add(issue, timeSpent, comment);
+          var o = p.startedAt || new Date().toString();
+          var s = new Date(o);
+          worklog.add(issue, timeSpent, comment, s);
         }
       });
     }).on('--help', function () {
