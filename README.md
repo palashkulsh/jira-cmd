@@ -53,6 +53,9 @@ Usage: jira [options] [command]
 
 Each command have individual usage help (using --help or -h)
 
+##### Advanced options
+Checkout ```~/.jira/config.json``` for more options.
+
 ## MIT License
 
 Copyright (c) 2013 <germanrcuriel@gmail.com>

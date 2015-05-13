@@ -3,6 +3,12 @@
   "description": "Another JIRA Command Line Interface",
   "version": "0.3.0",
   "author": "Germán Robledo <germanrcuriel@gmail.com>",
+  "contributors": [
+    {
+      "name": "Igor Escobar",
+      "email": "blog@igorescobar.com"
+    }
+  ],
   "dependencies": {
     "cli-table": "~0.2.0",
     "commander": "~1.1.1",
