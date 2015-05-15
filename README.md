@@ -34,17 +34,22 @@ Usage: jira [options] [command]
     start <issue>          Start working on an issue.
     stop <issue>           Stop working on an issue.
     review <issue> [assignee] Mark issue as being reviewed [by assignee(optional)].
-    done <issue>           Mark issue as finnished.
+    done <issue>           Mark issue as finished.
     running                List issues in progress.
     jql <query>            Run JQL query
     search <term>          Find issues.
     assign <issue> [user]  Assign an issue to <user>. Provide only issue# to assign to me
     comment <issue> [text] Comment an issue.
-    worklog <issue>        View the worklog of an issue.
-    worklogadd <issue> <timeSpent> [comment] Add a new worklog to an issue.
     show [options] <issue> Show info about an issue
-    create                 Create an issue or a sub-task
+    open <issue>           Open an issue in a browser
+    worklog <issue>        Show worklog about an issue
+    worklogadd [options] <issue> <timeSpent> [comment] Log work for an issue
+    create [project[-issue]] Create an issue or a sub-task
     config [options]       Change configuration
+    sprint [options]       Works with sprint boards
+    With no arguments, displays all rapid boards
+    With -r argument, attempt to find a single rapid board and display its active sprints
+    With both -r and -s arguments attempt to get a single rapidboard/ sprint and show its issues. If a single sprint board isnt found, show all matching sprint boards
 
   Options:
 
