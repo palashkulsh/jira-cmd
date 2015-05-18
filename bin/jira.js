@@ -21,7 +21,7 @@ requirejs([
 ], function (program, config, auth, ls, describe, assign, comment, create, sprint, transitions, worklog) {
 
   program
-    .version('v0.4.0');
+    .version('v0.4.1');
 
   program
     .command('ls')
