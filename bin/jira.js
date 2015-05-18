@@ -77,12 +77,12 @@ requirejs([
     });
 
   program
-    .command('done <issue>')
-    .description('Mark issue as finished.')
-    .action(function (issue) {
+    .command('done <issue> [resolution]')
+    .description('Mark issue as finished. [set a specific resolution(optional)]')
+    .action(function (issue, resolution) {
       auth.setConfig(function (auth) {
         if (auth) {
-          transitions.done(issue);
+          transitions.done(issue, resolution);
         }
       });
     });
