@@ -80,7 +80,7 @@ requirejs([
     .command('done <issue>')
     .option('-r, --resolution <name>', 'resolution name (e.g. \'Resolved\')', String)
     .option('-t, --timeSpent <time>', 'how much time spent (e.g. \'3h 30m\')', String)
-    .description('Mark issue as finished. [set a specific resolution(optional)]')
+    .description('Mark issue as finished.')
     .action(function (issue, options) {
       auth.setConfig(function (auth) {
         if (auth) {
