@@ -78,10 +78,16 @@ requirejs([
 
   program
     .command('done <issue> [resolution]')
+    .option('-t, --timeSpent <time>', 'how much time spent (e.g. \'3h 30m\')', String)
     .description('Mark issue as finished. [set a specific resolution(optional)]')
-    .action(function (issue, resolution) {
+    .action(function (issue, resolution, options) {
       auth.setConfig(function (auth) {
         if (auth) {
+
+          if (options.timeSpent) {
+            worklog.add(issue, options.timeSpent, "auto worklog", new Date());
+          }
+
           transitions.done(issue, resolution);
         }
       });
@@ -196,8 +202,7 @@ requirejs([
     .action(function (issue, timeSpent, comment, p) {
       auth.setConfig(function (auth) {
         if (auth) {
-          var o = p.startedAt || new Date().toString();
-          var s = new Date(o);
+          var o = p.startedAt || new Date().toString(), s = new Date(o);
           worklog.add(issue, timeSpent, comment, s);
         }
       });
