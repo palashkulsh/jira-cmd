@@ -77,10 +77,11 @@ requirejs([
     });
 
   program
-    .command('done <issue> [resolution]')
+    .command('done <issue>')
+    .option('-r, --resolution <name>', 'resolution name (e.g. \'Resolved\')', String)
     .option('-t, --timeSpent <time>', 'how much time spent (e.g. \'3h 30m\')', String)
     .description('Mark issue as finished. [set a specific resolution(optional)]')
-    .action(function (issue, resolution, options) {
+    .action(function (issue, options) {
       auth.setConfig(function (auth) {
         if (auth) {
 
@@ -88,7 +89,7 @@ requirejs([
             worklog.add(issue, options.timeSpent, "auto worklog", new Date());
           }
 
-          transitions.done(issue, resolution);
+          transitions.done(issue, options.resolution);
         }
       });
     });
