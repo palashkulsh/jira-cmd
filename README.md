@@ -34,7 +34,7 @@ Usage: jira [options] [command]
     start <issue>          Start working on an issue.
     stop <issue>           Stop working on an issue.
     review <issue> [assignee] Mark issue as being reviewed [by assignee(optional)].
-    done <issue>           Mark issue as finished.
+    done [options] <issue> Mark issue as finished.
     running                List issues in progress.
     jql <query>            Run JQL query
     search <term>          Find issues.
