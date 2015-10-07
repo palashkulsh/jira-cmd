@@ -21,7 +21,7 @@ requirejs([
 ], function (program, config, auth, ls, describe, assign, comment, create, sprint, transitions, worklog) {
 
   program
-    .version('v0.5.0');
+    .version('v0.4.1');
 
   program
     .command('ls')
@@ -78,18 +78,11 @@ requirejs([
 
   program
     .command('done <issue>')
-    .option('-r, --resolution <name>', 'resolution name (e.g. \'Resolved\')', String)
-    .option('-t, --timeSpent <time>', 'how much time spent (e.g. \'3h 30m\')', String)
     .description('Mark issue as finished.')
-    .action(function (issue, options) {
+    .action(function (issue) {
       auth.setConfig(function (auth) {
         if (auth) {
-
-          if (options.timeSpent) {
-            worklog.add(issue, options.timeSpent, "auto worklog", new Date());
-          }
-
-          transitions.done(issue, options.resolution);
+          transitions.done(issue);
         }
       });
     });
@@ -203,7 +196,8 @@ requirejs([
     .action(function (issue, timeSpent, comment, p) {
       auth.setConfig(function (auth) {
         if (auth) {
-          var o = p.startedAt || new Date().toString(), s = new Date(o);
+          var o = p.startedAt || new Date().toString();
+          var s = new Date(o);
           worklog.add(issue, timeSpent, comment, s);
         }
       });
@@ -217,12 +211,16 @@ requirejs([
     });
 
   program
-    .command('create [project[-issue]]')
+    .command('create <project>')
     .description('Create an issue or a sub-task')
-    .action(function (projIssue) {
+    .option('-p, --priority <priority>', 'Priority - 1 = Urgent, 3 = Not Urgent', String)
+    .option('-s, --summary <summary>', 'Summary', String)
+    .option('-d, --description <description>', 'Description', String)
+    .action(function (project, options) {
       auth.setConfig(function (auth) {
         if (auth) {
-          create.newIssue(projIssue);
+			var o = options || {};
+			create.newIssue(project, o.summary, o.description || '', o.priority || 3);
         }
       });
     });
