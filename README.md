@@ -1,8 +1,12 @@
-# jira-cmd
+jira-cmd
+========
+
+[![NPM Version](https://badge.fury.io/js/jira-cmd.svg)](https://npmjs.org/package/jira-cmd)
+[![Build Status](https://api.travis-ci.org/germanrcuriel/jira-cmd.svg?branch=master)](https://travis-ci.org/germanrcuriel/jira-cmd)
+[![Package downloads](http://img.shields.io/npm/dm/jira-cmd.svg)](https://npmjs.org/package/jira-cmd)
+
 
 A Jira command line interface based on [jilla](https://github.com/godmodelabs/jilla).
-
-[![NPM](https://nodei.co/npm/jira-cmd.png?downloads=true&stars=true)](https://nodei.co/npm/jira-cmd/)
 
 ## Installation
 
