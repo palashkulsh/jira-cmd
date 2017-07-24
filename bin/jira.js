@@ -109,8 +109,6 @@ requirejs([
     .command('jql [query]')
     .description('Run JQL query')
     .option('-c, --custom <name>', 'Filter by custom jql saved in jira config', String)
-    .option('-l, --list [name]', 'list all custom jql saved in system', String)
-    .option('-a, --add <name>', 'add custom jql to be saved in jira config', String)
     .action(function (query, options) {
       auth.setConfig(function (auth) {
         if (auth) {
