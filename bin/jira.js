@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 var requirejs = require('requirejs');
-
+// https://docs.atlassian.com/jira/REST/server/?_ga=2.55654315.1871534859.1501779326-1034760119.1468908320#api/2/issueLink-linkIssues
 requirejs.config({
   baseUrl: __dirname
 });
