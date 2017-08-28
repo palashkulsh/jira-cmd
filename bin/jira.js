@@ -101,6 +101,17 @@ requirejs([
     });
 
   program
+    .command('invalid <issue>')
+    .description('Mark issue as finished.')
+    .action(function (issue) {
+      auth.setConfig(function (auth) {
+        if (auth) {
+          transitions.invalid(issue);
+        }
+      });
+    });
+
+  program
     .command('running')
     .description('List issues in progress.')
     .action(function () {
@@ -112,7 +123,7 @@ requirejs([
     });
 
   program
-    .command('jql <query>')
+    .command('jql [query]')
     .description('Run JQL query')
     .option('-c, --custom <name>', 'Filter by custom jql saved in jira config', String)
     .action(function (query, options) {
