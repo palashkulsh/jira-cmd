@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 var requirejs = require('requirejs');
-
+// https://docs.atlassian.com/jira/REST/server/?_ga=2.55654315.1871534859.1501779326-1034760119.1468908320#api/2/issueLink-linkIssues
 requirejs.config({
   baseUrl: __dirname
 });
@@ -17,8 +17,14 @@ requirejs([
   '../lib/jira/create',
   '../lib/jira/sprint',
   '../lib/jira/transitions',
-  '../lib/jira/worklog'
-], function (program, config, auth, ls, describe, assign, comment, create, sprint, transitions, worklog) {
+  '../lib/jira/worklog',
+  '../lib/jira/link',
+  '../lib/jira/watch',
+], function (program, config, auth, ls, describe, assign, comment, create, sprint, transitions, worklog, link, watch) {
+
+     function finalCb(){
+       process.exit(1);
+     }
 
   program
     .version('v0.5.4');
@@ -95,6 +101,17 @@ requirejs([
     });
 
   program
+    .command('invalid <issue>')
+    .description('Mark issue as finished.')
+    .action(function (issue) {
+      auth.setConfig(function (auth) {
+        if (auth) {
+          transitions.invalid(issue);
+        }
+      });
+    });
+
+  program
     .command('running')
     .description('List issues in progress.')
     .action(function () {
@@ -106,16 +123,28 @@ requirejs([
     });
 
   program
-    .command('jql <query>')
+    .command('jql [query]')
     .description('Run JQL query')
-    .action(function (query) {
+    .option('-c, --custom <name>', 'Filter by custom jql saved in jira config', String)
+    .action(function (query, options) {
       auth.setConfig(function (auth) {
         if (auth) {
-          ls.jqlSearch(query);
+          ls.jqlSearch(query, options);
         }
       });
     });
 
+  program
+  .command('link <from> <to>')
+  .description('link issues')
+  .action(function (from, to, options) {
+    auth.setConfig(function (auth) {
+      if (auth) {
+        link(from, to, options, finalCb);
+      }
+    });
+  });
+     
   program
     .command('search <term>')
     .description('Find issues.')
@@ -138,6 +167,21 @@ requirejs([
             assign.to(issue, user);
           } else {
             assign.me(issue);
+          }
+        }
+      });
+    });
+
+  program
+    .command('watch <issue> [user]')
+    .description('Watch an issue to <user>. Provide only issue# to watch to me')
+    .action(function (issue, user) {
+      auth.setConfig(function (auth) {
+        if (auth) {
+          if(user) {
+            watch.to(issue, user);
+          } else {
+            watch.me(issue);
           }
         }
       });
@@ -259,7 +303,7 @@ requirejs([
     .action(function (options) {
       auth.setConfig(function (auth) {
         if (auth) {
-          sprint(options.rapidboard, options.sprint);
+            sprint(options.rapidboard, options.sprint, finalCb);
         }
       });
     });
