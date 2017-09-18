@@ -30,7 +30,8 @@ This save your credentials (base64 encoded) in your `$HOME/.jira` folder.
 
 ##### Help
 
-Usage: jira [options] [command]
+
+  Usage: jira.js [options] [command]
 
   Commands:
 
@@ -40,9 +41,11 @@ Usage: jira [options] [command]
     review <issue> [assignee] Mark issue as being reviewed [by assignee(optional)].
     done [options] <issue> Mark issue as finished.
     running                List issues in progress.
-    jql <query>            Run JQL query
+    jql [options] <query>  Run JQL query
+    link <from> <to>       link issues
     search <term>          Find issues.
     assign <issue> [user]  Assign an issue to <user>. Provide only issue# to assign to me
+    watch <issue> [user]   Watch an issue to <user>. Provide only issue# to watch to me
     comment <issue> [text] Comment an issue.
     show [options] <issue> Show info about an issue
     open <issue>           Open an issue in a browser
@@ -59,6 +62,7 @@ Usage: jira [options] [command]
 
     -h, --help     output usage information
     -V, --version  output the version number
+
 
 Each command have individual usage help (using --help or -h)
 

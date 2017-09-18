@@ -20,8 +20,7 @@ requirejs([
   '../lib/jira/worklog',
   '../lib/jira/link',
   '../lib/jira/watch',
-  '../lib/jira/add_to_sprint'
-], function (program, config, auth, ls, describe, assign, comment, create, sprint, transitions, worklog, link, watch, add_to_sprint) {
+], function (program, config, auth, ls, describe, assign, comment, create, sprint, transitions, worklog, link, watch) {
 
      function finalCb(){
        process.exit(1);
@@ -102,6 +101,17 @@ requirejs([
     });
 
   program
+    .command('invalid <issue>')
+    .description('Mark issue as finished.')
+    .action(function (issue) {
+      auth.setConfig(function (auth) {
+        if (auth) {
+          transitions.invalid(issue);
+        }
+      });
+    });
+
+  program
     .command('running')
     .description('List issues in progress.')
     .action(function () {
@@ -113,7 +123,7 @@ requirejs([
     });
 
   program
-    .command('jql <query>')
+    .command('jql [query]')
     .description('Run JQL query')
     .option('-c, --custom <name>', 'Filter by custom jql saved in jira config', String)
     .action(function (query, options) {
@@ -290,16 +300,10 @@ requirejs([
                  'a single sprint board isnt found, show all matching sprint boards')
     .option('-r, --rapidboard <name>', 'Rapidboard to show sprints for', String)
     .option('-s, --sprint <name>', 'Sprint to show the issues', String)
-    .option('-a, --add <projIssue> ', 'Add project issue to sprint', String)
-    .option('-i, --sprintId <sprintId> ', 'Id of the sprint', String)
     .action(function (options) {
       auth.setConfig(function (auth) {
         if (auth) {
-          if(options.add){
-            add_to_sprint(options, finalCb);
-          } else {
             sprint(options.rapidboard, options.sprint, finalCb);
-          }
         }
       });
     });
