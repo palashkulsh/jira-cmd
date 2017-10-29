@@ -1,7 +1,7 @@
 {
   "name": "jira-cmd",
   "description": "Another JIRA Command Line Interface",
-  "version": "0.5.9",
+  "version": "0.5.8",
   "author": "Germán Robledo <germanrcuriel@gmail.com>",
   "contributors": [
     {
@@ -34,7 +34,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/palashkulsh/jira-cmd.git"
+    "url": "git://github.com/germanrcuriel/jira-cmd.git"
   },
   "bin": {
     "jira": "./bin/jira.js"
