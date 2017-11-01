@@ -63,6 +63,20 @@ This save your credentials (base64 encoded) in your `$HOME/.jira` folder.
     -h, --help     output usage information
     -V, --version  output the version number
 
+Using Create
+	
+	Usage: create [options] [project[-issue]]
+		Options:
+	
+		-h, --help                      output usage information
+		-p, --project <project>         Rapid board on which project is to be created
+		-P, --priority <priority>       priority of the issue
+		-T --type <type>                Issue type
+		-s --subtask <subtask>          Issue subtask
+		-t --title <title>              Issue title
+		-d --description <description>  Issue description
+		-a --assignee <assignee>        Issue assignee
+
 
 Each command have individual usage help (using --help or -h)
 
