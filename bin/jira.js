@@ -3,7 +3,7 @@
 var requirejs = require('requirejs');
 // https://docs.atlassian.com/jira/REST/server/?_ga=2.55654315.1871534859.1501779326-1034760119.1468908320#api/2/issueLink-linkIssues
 // https://developer.atlassian.com/jiradev/jira-apis/about-the-jira-rest-apis/jira-rest-api-tutorials/jira-rest-api-examples#JIRARESTAPIexamples-Creatinganissueusingcustomfields
-// required fields https://jira.mypaytm.com/rest/api/2/issue/createmeta?projectKeys=MDO&expand=projects.issuetypes.fields&
+// required fields https://jira.project.com/rest/api/2/issue/createmeta?projectKeys=MDO&expand=projects.issuetypes.fields&
 requirejs.config({
     baseUrl: __dirname
 });
