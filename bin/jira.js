@@ -22,8 +22,9 @@ requirejs([
     '../lib/jira/worklog',
     '../lib/jira/link',
     '../lib/jira/watch',
-    '../lib/jira/add_to_sprint'
-], function (program, config, auth, ls, describe, assign, comment, create, sprint, transitions, worklog, link, watch, add_to_sprint) {
+    '../lib/jira/add_to_sprint',
+    '../lib/jira/new'
+], function (program, config, auth, ls, describe, assign, comment, create, sprint, transitions, worklog, link, watch, add_to_sprint, new_create) {
 
     function finalCb() {
         process.exit(1);
@@ -278,6 +279,25 @@ requirejs([
             auth.setConfig(function (auth) {
                 if (auth) {
                     create.newIssue(projIssue, options);
+                }
+            });
+        });
+
+    program
+        .command('new [key]')
+        .description('Create an issue or a sub-task')
+        .option('-p, --project <project>', 'Rapid board on which project is to be created', String)
+        .option('-P, --priority <priority>', 'priority of the issue', String)
+        .option('-T --type <type>', 'Issue type', String)
+        .option('-s --subtask <subtask>', 'Issue subtask', String)
+        .option('-t --title <title>', 'Issue title', String)
+        .option('-d --description <description>', 'Issue description', String)
+        .option('-a --assignee <assignee>', 'Issue assignee', String)
+        .action(function (key, options) {      
+            auth.setConfig(function (auth) {
+                if (auth) {
+                  options.key=key;
+                  new_create.create(options, finalCb);
                 }
             });
         });
