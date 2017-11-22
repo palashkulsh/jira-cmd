@@ -26,7 +26,8 @@ requirejs([
     '../lib/jira/new'
 ], function (program, config, auth, ls, describe, assign, comment, create, sprint, transitions, worklog, link, watch, add_to_sprint, new_create) {
 
-    function finalCb() {
+    function finalCb(err) {
+      console.log(err);
         process.exit(1);
     }
 
