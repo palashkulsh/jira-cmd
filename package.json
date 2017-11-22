@@ -11,10 +11,10 @@
   ],
   "dependencies": {
     "async": "^2.6.0",
-    "cli-table2": "^0.2.0",
+    "cli-table": "~0.2.0",
     "commander": "~1.1.1",
     "dargs": "^5.1.0",
-    "moment": "~> 2.19.3",
+    "moment": "^2.10.2",
     "openurl": "^1.1.0",
     "qs": "~> 1.0.0",
     "requirejs": "~2.1.5",
