@@ -11,7 +11,7 @@
   ],
   "dependencies": {
     "async": "^2.6.0",
-    "cli-table": "~0.2.0",
+    "cli-table2": "^0.2.0",
     "commander": "~1.1.1",
     "dargs": "^5.1.0",
     "moment": "~> 2.19.3",
