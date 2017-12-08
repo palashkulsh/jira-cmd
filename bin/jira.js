@@ -27,7 +27,7 @@ requirejs([
      }
 
   program
-    .version('v0.5.4');
+    .version('v0.6.0');
 
   program
     .command('ls')
