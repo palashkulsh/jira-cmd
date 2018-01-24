@@ -169,6 +169,7 @@ requirejs([
             auth.setConfig(function (auth) {
                 if (auth) {
                     if (user) {
+                        user = config.user_alias[user];
                         assign.to(issue, user);
                     } else {
                         assign.me(issue);
@@ -184,6 +185,7 @@ requirejs([
             auth.setConfig(function (auth) {
                 if (auth) {
                     if (user) {
+                        user = config.user_alias[user];
                         watch.to(issue, user);
                     } else {
                         watch.me(issue);
@@ -198,7 +200,7 @@ requirejs([
         .action(function (issue, text) {
             auth.setConfig(function (auth) {
                 if (auth) {
-                    if (text) {
+                    if (text) {                      
                         comment.to(issue, text);
                     } else {
                         comment.show(issue);
