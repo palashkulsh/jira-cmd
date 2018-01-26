@@ -202,7 +202,18 @@ requirejs([
         .action(function (issue, text) {
             auth.setConfig(function (auth) {
                 if (auth) {
-                    if (text) {                      
+                    if (text) {
+                      //replace name in comment text if present in user_alias config
+                      //if vikas is nickname stored in user_alias config for vikas.sharma
+                      //then 'vikas has username [~vikas] [~ajitk] [~mohit] becomes 'vikas has username [~vikas.sharma] [~ajitk] [~mohit]
+                      //names which do not match any alias are not changed
+                      text = text.replace(/\[~(.*?)\]/g,function(match, tag, index){
+                        if(config.user_alias[tag]){
+                          return '[~'+config.user_alias[tag]+']';
+                        } else {
+                          return tag;
+                        }
+                      });
                         comment.to(issue, text);
                     } else {
                         comment.show(issue);
