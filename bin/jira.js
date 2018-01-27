@@ -22,9 +22,8 @@ requirejs([
     '../lib/jira/worklog',
     '../lib/jira/link',
     '../lib/jira/watch',
-    '../lib/jira/add_to_sprint',
     '../lib/jira/new'
-], function (program, config, auth, ls, describe, assign, comment, create, sprint, transitions, worklog, link, watch, add_to_sprint, new_create) {
+], function (program, config, auth, ls, describe, assign, comment, create, sprint, transitions, worklog, link, watch, new_create) {
 
      function finalCb(){
        process.exit(1);
