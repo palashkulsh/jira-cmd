@@ -354,9 +354,9 @@ requirejs([
             auth.setConfig(function (auth) {
                 if (auth) {
                     if (options.add) {
-                        add_to_sprint(options, finalCb);
+                        add_to_sprint.addIssuesViaKey(options, finalCb);
                     } else if (options.jql){
-                      
+                      add_to_sprint.addAllJqlToSprint(options, finalCb)
                     }else {
                         sprint(options.rapidboard, options.sprint, finalCb);
                     }
