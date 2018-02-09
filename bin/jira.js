@@ -45,9 +45,9 @@ requirejs([
             auth.setConfig(function (auth) {
                 if (auth) {
                     if (options.project) {
-                        ls.showByProject(options.project, options.type);
+                        ls.showByProject(options.project, options.type, finalCb);
                     } else {
-                        ls.showAll(options.type);
+                        ls.showAll(options.type, finalCb);
                     }
                 }
             });
@@ -124,7 +124,7 @@ requirejs([
         .action(function () {
             auth.setConfig(function (auth) {
                 if (auth) {
-                    ls.showInProgress();
+                    ls.showInProgress(finalCb);
                 }
             });
         });
@@ -136,7 +136,7 @@ requirejs([
         .action(function (query, options) {
             auth.setConfig(function (auth) {
                 if (auth) {
-                    ls.jqlSearch(query, options);
+                    ls.jqlSearch(query, options, finalCb);
                 }
             });
         });
@@ -158,7 +158,7 @@ requirejs([
         .action(function (query) {
             auth.setConfig(function (auth) {
                 if (auth) {
-                    ls.search(query);
+                    ls.search(query, finalCb);
                 }
             });
         });
@@ -349,12 +349,15 @@ requirejs([
         .option('-s, --sprint <name>', 'Sprint to show the issues', String)
         .option('-a, --add <projIssue> ', 'Add project issue to sprint', String)
         .option('-i, --sprintId <sprintId> ', 'Id of the sprint', String)
+        .option('-j, --jql <jql> ', 'Id of the sprint', String)
         .action(function (options) {
             auth.setConfig(function (auth) {
                 if (auth) {
                     if (options.add) {
                         add_to_sprint(options, finalCb);
-                    } else {
+                    } else if (options.jql){
+                      
+                    }else {
                         sprint(options.rapidboard, options.sprint, finalCb);
                     }
                 }
