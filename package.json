@@ -13,6 +13,10 @@
       "email": "palashkulsh.github.io"
     }
   ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "patch-release": "npm version patch && npm publish && git push --follow-tags"
+  },    
   "dependencies": {
     "async": "^2.6.0",
     "cli-table": "~0.2.0",
