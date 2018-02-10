@@ -348,8 +348,8 @@ requirejs([
         .option('-r, --rapidboard <name>', 'Rapidboard to show sprints for', String)
         .option('-s, --sprint <name>', 'Sprint to show the issues', String)
         .option('-a, --add <projIssue> ', 'Add project issue to sprint', String)
-        .option('-i, --sprintId <sprintId> ', 'Id of the sprint', String)
-        .option('-j, --jql <jql> ', 'Id of the sprint', String)
+        .option('-i, --sprintId <sprintId> ', 'Id of the sprint which you want your issues to be added to', String)
+        .option('-j, --jql <jql> ', 'jql of the issues which you want to add to the sprint', String)
         .action(function (options) {
             auth.setConfig(function (auth) {
                 if (auth) {
