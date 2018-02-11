@@ -107,9 +107,9 @@ Usage: sprint [options]
 
 Explaining ~/.jira/config.json
   * auth : here the basic authentication information is stored. You would need to change it if url of your jira is changed.
-  * custom_jql
-  * user_alias
-  * default_create
+  * custom_jql:  here you will store the jql to get the type of issues you frequently want to see and monitor in single command. eg. jira jql reported would give the issues corresponding to jql saved against reported key in custom_jql by default. 
+  * user_alias: now this is a very useful section. here you can save alias for usernames, so that you dont have to remember the usernames everytime you assign an issue to someone , or you have to comment someone's name in an issue. for assigning you just use "jira assign ISSUE_KEY ALIAS" . or for commenting you just have to use jira comment ISSUE_KEY "[~ALIAS]" and the username corresponding to that alias would be piicked up automatically before posting the comment.
+  * default_create : now this is the jira new functionality
   * edit_meta
   * options
 
