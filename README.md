@@ -105,7 +105,13 @@ Usage: sprint [options]
     -i, --sprintId <sprintId>   Id of the sprint
     -j, --jql <jql>             Id of the sprint
 
-
+Explaining ~/.jira/config.json
+  * auth : here the basic authentication information is stored. You would need to change it if url of your jira is changed.
+  * custom_jql
+  * user_alias
+  * default_create
+  * edit_meta
+  * options
 
 Each command have individual usage help (using --help or -h)
 
