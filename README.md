@@ -77,6 +77,35 @@ Using Create
 		-d --description <description>  Issue description
 		-a --assignee <assignee>        Issue assignee
 
+Using Jira JQL
+	get issues for jql eg. jira jql "YOUR_JQL_OR_JQL_SHORTCUT"
+	when using a particular jql frequently , you can save that jql in ~/.jira/config.json,an example jql is saved there with key reported
+  * eg .  jira jql reported would run the jql written against reported key [saved by default ] in ~/.jira/config.json
+
+	Usage: jql [options] [query]
+	Options:
+  
+    -h, --help           output usage information
+    -c, --custom <name>  Filter by custom jql saved in jira config
+
+
+Using jira sprint functionality, you can
+
+  * get issues tagged in a sprint eg. jira sprint -r YOUR_RAPIDBOARD -s STRING_TO_SEARCH_IN_SPRINT_NAME
+  * tag an issue in a sprint eg. jira sprint -a YOUR_ISSUE_KEY -i YOUR_SPRINT_ID
+  * tag multiple issues from JQL to a sprint . Eg. jira sprint -j YOUR_JQL_OR_JQL_SHORTCUT -i YOUR_SPRINT_ID
+  
+Usage: sprint [options]
+
+	Options:	
+    -h, --help                  output usage information
+    -r, --rapidboard <name>     Rapidboard to show sprints for
+    -s, --sprint <name>         Sprint to show the issues
+    -a, --add <projIssue>       Add project issue to sprint
+    -i, --sprintId <sprintId>   Id of the sprint
+    -j, --jql <jql>             Id of the sprint
+
+
 
 Each command have individual usage help (using --help or -h)
 
