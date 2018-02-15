@@ -1,7 +1,7 @@
 {
   "name": "cmd-jira",
   "description": "Another JIRA Command Line Interface",
-  "version": "0.5.20",
+  "version": "0.5.21",
   "author": "Germán Robledo <germanrcuriel@gmail.com>",
   "contributors": [
     {
