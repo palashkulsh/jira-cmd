@@ -8,6 +8,16 @@ jira-cmd
 
 A Jira command line interface based on [jilla](https://github.com/godmodelabs/jilla).
 
+Its got tons of functionalities
+  * showing all jira assigned to you
+  * show all jira corresponding to custom JQL
+  * showing all jira with shortcut to custom JQL saved in config
+  * creating new jira
+  * creating new jira with shortcut that picks the default values for fields configured in config
+  * showing sprint details and sprint id for boards
+  * adding an issue to sprint 
+  * adding multiple issues to a sprint in one go
+  * ability to use username alias shortcuts for commenting,assigning and adding watchers. It helps to not remember the usernames, just save their shortcuts in config.
 ## Installation
 
 Install [node.js](http://nodejs.org/).
@@ -109,7 +119,7 @@ Explaining ~/.jira/config.json
   * auth : here the basic authentication information is stored. You would need to change it if url of your jira is changed.
   * custom_jql:  here you will store the jql to get the type of issues you frequently want to see and monitor in single command. eg. jira jql reported would give the issues corresponding to jql saved against reported key in custom_jql by default. 
   * user_alias: now this is a very useful section. here you can save alias for usernames, so that you dont have to remember the usernames everytime you assign an issue to someone , or you have to comment someone's name in an issue. for assigning you just use "jira assign ISSUE_KEY ALIAS" . or for commenting you just have to use jira comment ISSUE_KEY "[~ALIAS]" and the username corresponding to that alias would be piicked up automatically before posting the comment.
-  * default_create : now this is the jira new functionality
+  * default_create : now this is part of the jira new functionality, in which you can configure templates in config.json, so when you create a new jira, default values are picked from templates and other required fields or fields which you have declared mandatory are prompted for your input.
   * edit_meta
   * options
 
