@@ -73,7 +73,7 @@ This save your credentials (base64 encoded) in your `$HOME/.jira` folder.
     -h, --help     output usage information
     -V, --version  output the version number
 
-Using Create
+### Using Create
 	
 	Usage: create [options] [project[-issue]]
 		Options:
@@ -87,7 +87,8 @@ Using Create
 		-d --description <description>  Issue description
 		-a --assignee <assignee>        Issue assignee
 
-Using Jira JQL
+### Using Jira JQL
+
   *	get issues for jql eg. <kbd>jira jql "YOUR_JQL_OR_JQL_SHORTCUT"</kbd> when using a particular jql frequently , you can save that jql in **~/.jira/config.json**,an example jql is saved there with key reported
   * eg .  jira jql reported would run the jql written against reported key [saved by default ] in ~/.jira/config.json
 
@@ -123,7 +124,7 @@ if you want to search a text in all the issues
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ### how to use username alias/nicknames with cmd-jira
-
+  * [find users username](###finding-username)
   * save the username alias/nickname in user_alias block of  ~/.jira/config.json .
 	* for eg. if username  is palashkulsh@gmail.com and you choose nickname as palash then your user_alias map would look like
 
@@ -139,6 +140,13 @@ if you want to search a text in all the issues
 	  * **to add watchers** <kbd>jira watch MPP-948 nickname1</kbd>
 	  * **to tag some one in comment** <kbd>jira comment MPP-948 "[~nickname2] you are tagged in this comment"</kbd> 
       * **assigning an issue to someone using nickname** <kbd>jira assign MPP-948 nickname1</kbd> would assign MPP-948 to nickname1 user.
+
+
+### finding username
+  * to find a user's username
+      * browse to their profile on jira
+      * under their avatar/photo is a field called **Username**
+      * this is the user's username which you should use.
 
 ### Explaining ~/.jira/config.json
   * **auth** : here the basic authentication information is stored. You would need to change it if url of your jira is changed.
