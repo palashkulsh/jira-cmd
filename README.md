@@ -88,22 +88,21 @@ Using Create
 		-a --assignee <assignee>        Issue assignee
 
 Using Jira JQL
-	get issues for jql eg. jira jql "YOUR_JQL_OR_JQL_SHORTCUT"
-	when using a particular jql frequently , you can save that jql in ~/.jira/config.json,an example jql is saved there with key reported
+  *	get issues for jql eg. <kbd>jira jql "YOUR_JQL_OR_JQL_SHORTCUT"</kbd> when using a particular jql frequently , you can save that jql in **~/.jira/config.json**,an example jql is saved there with key reported
   * eg .  jira jql reported would run the jql written against reported key [saved by default ] in ~/.jira/config.json
 
-	Usage: jql [options] [query]
-	Options:
-  
-    -h, --help           output usage information
-    -c, --custom <name>  Filter by custom jql saved in jira config
+        Usage: jql [options] [query]
+        	Options:
+          
+            -h, --help           output usage information
+            -c, --custom <name>  Filter by custom jql saved in jira config
 
 
-Using jira sprint functionality, you can
+### Using jira sprint functionality, you can
 
-  * get issues tagged in a sprint eg. jira sprint -r YOUR_RAPIDBOARD -s STRING_TO_SEARCH_IN_SPRINT_NAME
-  * tag an issue in a sprint eg. jira sprint -a YOUR_ISSUE_KEY -i YOUR_SPRINT_ID
-  * tag multiple issues from JQL to a sprint . Eg. jira sprint -j YOUR_JQL_OR_JQL_SHORTCUT -i YOUR_SPRINT_ID
+  * get issues tagged in a sprint eg. <kbd>jira sprint -r YOUR_RAPIDBOARD -s STRING_TO_SEARCH_IN_SPRINT_NAME</kbd>
+  * tag an issue in a sprint eg. <kbd>jira sprint -a YOUR_ISSUE_KEY -i YOUR_SPRINT_ID</kbd>
+  * tag multiple issues from JQL to a sprint . Eg. <kbd>jira sprint -j YOUR_JQL_OR_JQL_SHORTCUT -i YOUR_SPRINT_ID</kbd>
   
 Usage: sprint [options]
 
@@ -115,13 +114,63 @@ Usage: sprint [options]
     -i, --sprintId <sprintId>   Id of the sprint
     -j, --jql <jql>             Id of the sprint
 
-Explaining ~/.jira/config.json
-  * auth : here the basic authentication information is stored. You would need to change it if url of your jira is changed.
-  * custom_jql:  here you will store the jql to get the type of issues you frequently want to see and monitor in single command. eg. jira jql reported would give the issues corresponding to jql saved against reported key in custom_jql by default. 
-  * user_alias: now this is a very useful section. here you can save alias for usernames, so that you dont have to remember the usernames everytime you assign an issue to someone , or you have to comment someone's name in an issue. for assigning you just use "jira assign ISSUE_KEY ALIAS" . or for commenting you just have to use jira comment ISSUE_KEY "[~ALIAS]" and the username corresponding to that alias would be piicked up automatically before posting the comment.
-  * default_create : now this is part of the jira new functionality, in which you can configure templates in config.json, so when you create a new jira, default values are picked from templates and other required fields or fields which you have declared mandatory are prompted for your input.
-  * edit_meta
-  * options
+
+### searching issues
+if you want to search a text in all the issues 
+  * **using jira search** <kbd>jira jql search SEARCH_TERM</kbd>
+  * **using jira jql [recommended]** <kbd>jira jql "summary ~ SEARCH_TERM OR description ~ SEARCH_TERM"</kbd>
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+### how to use username alias/nicknames with cmd-jira
+
+  * save the username alias/nickname in user_alias block of  ~/.jira/config.json .
+	* for eg. if username  is palashkulsh@gmail.com and you choose nickname as palash then your user_alias map would look like
+
+	``` json
+		{
+			"user_alias" :{
+				"nickname1" : "username of user 1",
+				"nickname2" : "username 2"
+			}
+		}
+	```
+	* now you can use the nickname in following commands
+	  * **to add watchers** <kbd>jira watch MPP-948 nickname1</kbd>
+	  * **to tag some one in comment** <kbd>jira comment MPP-948 "[~nickname2] you are tagged in this comment"</kbd> 
+      * **assigning an issue to someone using nickname** <kbd>jira assign MPP-948 nickname1</kbd> would assign MPP-948 to nickname1 user.
+
+### Explaining ~/.jira/config.json
+  * **auth** : here the basic authentication information is stored. You would need to change it if url of your jira is changed.
+	* example block
+	
+	``` json
+		"auth": {
+			"token": "AUTO_GENERATED_TOKEN_FROM_PASSWORD",
+			"url": "YOUR_JIRA_URL",
+			"user": "YOUR_JIRA_EMAIL"
+		}
+	```
+	
+	* mostly you wont need to touch this block, only when your username or password changes then you'll have to reconfigure it using jira config command.
+
+  * **custom_jql**:  here you will store the jql to get the type of issues you frequently want to see and monitor in single command. eg. jira jql reported would give the issues corresponding to jql saved against reported key in custom_jql by default. 
+	* example block
+	
+	``` json
+		"custom_jql": {
+			"mpp": "project=MPP and status !=done",
+			"reported": "reporter=currentUser() and status not in ('Done', 'Invalid')",
+		},
+
+	```
+	* now you can use this jql in multiple commands
+	  * **listing jql issues** <kbd>jira jql reported</kbd>
+       * **adding all issues in jql to a sprint id** <kbd>jira sprint -j reported -i SPRINT_ID</kbd>
+
+  * **default_create** : now this is part of the jira new functionality, in which you can configure templates in config.json, so when you create a new jira, default values are picked from templates and other required fields or fields which you have declared mandatory are prompted for your input.
+  * **edit_meta**
+  * **options**
 
 Each command have individual usage help (using --help or -h)
 
