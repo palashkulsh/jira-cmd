@@ -87,6 +87,69 @@ This save your credentials (base64 encoded) in your `$HOME/.jira` folder.
 		-d --description <description>  Issue description
 		-a --assignee <assignee>        Issue assignee
 
+
+### Using jira new functionality
+
+#### What does jira new offers
+  * if you make issues very frequently then you can save multiple templates of default values with a key to call with in ~/jira/config.json . then you just have to do <kbd>jira new KEY1</kbd>
+	* 
+	  
+``` json
+    "default_create" : {
+	<!-- fields which you want to prompt every time  -->
+	<!-- whenever you create a new issue -->
+	"__always_ask" :{
+	    "fields" :{
+		"description" :{}, <!-- description would be prompted everytime -->
+		"priority": {}	   <!-- priority would be prompted every time -->
+	    }
+	},
+	<!-- you will do jira new KEY1 to use this template of default values -->
+	"KEY1" : {
+	    "project": "YOUR_PROJECT", <!-- mandatory -->
+	    "issueType": 3,			   <!-- mandatory -->
+	    "default" : {
+			"components": [{
+				"id": "15226"
+			}],
+			"customfield_12901" : "infrastructure",
+			"customfield_10008" : "MDO-9584",
+			"customfield_12902": {
+				"id": "11237"
+			},
+			<!-- in this case, this customfield corresponds to cc-->
+			<!-- , so when creating new jira with this template-->
+			<!-- every iissue would have username prakhar in cc-->
+			"customfield_10901": [{ <!-- how to give usernames -->
+				"name": "prakhar"	
+			}]
+	    },
+	"quick" : { <!-- another template shortcut -->
+	
+		},
+	"SOME_ALIAS" :{ <!-- yet another template shortcut -->
+	
+		}
+	},
+}
+```
+  * Now there are 2 portions of `default_create` config 
+	*  `__always_ask` : it contains the fields which would always be prompted when you create an issue. For eg. in above given json , whenever we'll create a new issue , description and priority would always be asked along with other mandatory fields for the board.
+	*  Rest of the keys in `default_create` are the shortcut keys which you will refer to while calling <kbd>jira new key</kbd>
+
+
+#### How to know the fields metadata for a project/rapidboard
+  * Fill your jira link and project name in link given below
+	* `https://YOUR_JIRA_LINK/rest/api/2/issue/createmeta?projectKeys=YOUR_PROJECT&expand=projects.issuetypes.fields&`
+  * Now you have to find the fields for which you want to save the default values.
+  * Save the `project` and `issueType` at the root level inside your KEY or alias you choose, for Eg. KEY1 in our case.
+  * now create a default key with object of values corresponding values you want to set as default.
+  * Now assigning values to customfields can be somewhat tricky. You'll have to check the type of customfields and their allowed values before saving them.
+  * Some useful links in finding out how to use customfields would be
+	* <https://docs.atlassian.com/jira/REST/server/?_ga=2.55654315.1871534859.1501779326-1034760119.1468908320#api/2/issueLink-linkIssues>
+	*  <https://developer.atlassian.com/jiradev/jira-apis/about-the-jira-rest-apis/jira-rest-api-tutorials/jira-rest-api-examples#JIRARESTAPIexamples-Creatinganissueusingcustomfields>
+  *  If you are not able to create a template
+ 
 ### Using Jira JQL
 
   *	get issues for jql eg. <kbd>jira jql "YOUR_JQL_OR_JQL_SHORTCUT"</kbd> when using a particular jql frequently , you can save that jql in **~/.jira/config.json**,an example jql is saved there with key reported
