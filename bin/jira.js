@@ -133,11 +133,17 @@ requirejs([
         .command('jql [query]')
         .description('Run JQL query')
         .option('-c, --custom <name>', 'Filter by custom jql saved in jira config', String)
+        .option('-s, --custom_sql <name>', 'Filter by custom alasql saved in jira config', String)
+        .option('-j, --json <value>', 'Output in json', String, 0)
         .action(function (query, options) {
             auth.setConfig(function (auth) {
                 if (auth) {
+                  if(options.custom_sql){
+                    ls.aggregateResults(query, options, finalCb);
+                  } else {
                     ls.jqlSearch(query, options, finalCb);
-                }
+                  }
+                }              
             });
         });
 
