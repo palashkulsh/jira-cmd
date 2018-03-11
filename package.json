@@ -18,6 +18,7 @@
     "patch-release": "npm version patch && npm publish && git push --follow-tags"
   },
   "dependencies": {
+    "alasql": "^0.4.5",
     "async": "^2.6.0",
     "cli-table": "~0.2.0",
     "commander": "~1.1.1",
