@@ -14,8 +14,9 @@
     "cli-table": "~0.2.0",
     "commander": "~1.1.1",
     "dargs": "^5.1.0",
-    "moment": "^2.10.2",
+    "moment": "~> 2.19.3",
     "openurl": "^1.1.0",
+    "qs": "~> 1.0.0",
     "requirejs": "~2.1.5",
     "superagent": "~0.13.0"
   },
