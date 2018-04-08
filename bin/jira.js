@@ -2,25 +2,28 @@
 
 var requirejs = require('requirejs');
 // https://docs.atlassian.com/jira/REST/server/?_ga=2.55654315.1871534859.1501779326-1034760119.1468908320#api/2/issueLink-linkIssues
+// https://developer.atlassian.com/jiradev/jira-apis/about-the-jira-rest-apis/jira-rest-api-tutorials/jira-rest-api-examples#JIRARESTAPIexamples-Creatinganissueusingcustomfields
+// required fields https://jira.mypaytm.com/rest/api/2/issue/createmeta?projectKeys=MDO&expand=projects.issuetypes.fields&
 requirejs.config({
   baseUrl: __dirname
 });
 
 requirejs([
-  'commander',
-  '../lib/config',
-  '../lib/auth',
-  '../lib/jira/ls',
-  '../lib/jira/describe',
-  '../lib/jira/assign',
-  '../lib/jira/comment',
-  '../lib/jira/create',
-  '../lib/jira/sprint',
-  '../lib/jira/transitions',
-  '../lib/jira/worklog',
-  '../lib/jira/link',
-  '../lib/jira/watch',
-], function (program, config, auth, ls, describe, assign, comment, create, sprint, transitions, worklog, link, watch) {
+    'commander',
+    '../lib/config',
+    '../lib/auth',
+    '../lib/jira/ls',
+    '../lib/jira/describe',
+    '../lib/jira/assign',
+    '../lib/jira/comment',
+    '../lib/jira/create',
+    '../lib/jira/sprint',
+    '../lib/jira/transitions',
+    '../lib/jira/worklog',
+    '../lib/jira/link',
+    '../lib/jira/watch',
+    '../lib/jira/new'
+], function (program, config, auth, ls, describe, assign, comment, create, sprint, transitions, worklog, link, watch, new_create) {
 
      function finalCb(){
        process.exit(1);
@@ -271,24 +274,44 @@ requirejs([
       });
     });
 
-  program
-    .command('config')
-    .description('Change configuration')
-    .option('-c, --clear', 'Clear stored configuration')
-    .action(function (options) {
-      if (options.clear) {
-        auth.clearConfig();
-      } else {
-        auth.setConfig();
-      }
-    }).on('--help', function () {
-      console.log('  Config Help:');
-      console.log();
-      console.log('    Jira URL: https://foo.atlassian.net/');
-      console.log('    Username: user (for user@foo.bar)');
-      console.log('    Password: Your password');
-      console.log();
-    });
+
+    program
+        .command('new [key]')
+        .description('Create an issue or a sub-task')
+        .option('-p, --project <project>', 'Rapid board on which project is to be created', String)
+        .option('-P, --priority <priority>', 'priority of the issue', String)
+        .option('-T --type <type>', 'Issue type', String)
+        .option('-s --subtask <subtask>', 'Issue subtask', String)
+        .option('-t --title <title>', 'Issue title', String)
+        .option('-d --description <description>', 'Issue description', String)
+        .option('-a --assignee <assignee>', 'Issue assignee', String)
+        .action(function (key, options) {      
+            auth.setConfig(function (auth) {
+                if (auth) {
+                  options.key=key;
+                  new_create.create(options, finalCb);
+                }
+            });
+        });
+
+    program
+        .command('config')
+        .description('Change configuration')
+        .option('-c, --clear', 'Clear stored configuration')
+        .action(function (options) {
+            if (options.clear) {
+                auth.clearConfig();
+            } else {
+                auth.setConfig();
+            }
+        }).on('--help', function () {
+            console.log('  Config Help:');
+            console.log();
+            console.log('    Jira URL: https://foo.atlassian.net/');
+            console.log('    Username: user (for user@foo.bar)');
+            console.log('    Password: Your password');
+            console.log();
+        });
 
   program
     .command('sprint')
