@@ -4,6 +4,7 @@ var requirejs = require('requirejs');
 // https://docs.atlassian.com/jira/REST/server/?_ga=2.55654315.1871534859.1501779326-1034760119.1468908320#api/2/issueLink-linkIssues
 // https://developer.atlassian.com/jiradev/jira-apis/about-the-jira-rest-apis/jira-rest-api-tutorials/jira-rest-api-examples#JIRARESTAPIexamples-Creatinganissueusingcustomfields
 // required fields https://jira.project.com/rest/api/2/issue/createmeta?projectKeys=MDO&expand=projects.issuetypes.fields&
+//http://localhost:8080/rest/api/2/issue/JRA-13/editmeta
 requirejs.config({
     baseUrl: __dirname
 });
@@ -120,6 +121,7 @@ requirejs([
         });
 
     program
+<<<<<<< HEAD
         .command('edit <issue> [input]')
         .description('edit issue.')
         .action(function (issue, input) {
@@ -134,6 +136,18 @@ requirejs([
             });
         });
 
+=======
+        .command('mark <issue>')
+        .description('Mark issue as.')
+        .action(function (issue) {
+            auth.setConfig(function (auth) {
+                if (auth) {
+                    transitions.makeTransition(issue, finalCb);
+                }
+            });
+        });
+    
+>>>>>>> eb72397... generic transitions
     program
         .command('running')
         .description('List issues in progress.')
