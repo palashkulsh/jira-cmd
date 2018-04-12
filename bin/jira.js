@@ -29,7 +29,7 @@ requirejs([
 
     function finalCb(err) {
       if(err){
-        console.log(err);
+          console.log(err.toString());
       }
       process.exit(1);
     }
@@ -120,12 +120,16 @@ requirejs([
         });
 
     program
-        .command('edit <issue>')
+        .command('edit <issue> [input]')
         .description('edit issue.')
-        .action(function (issue) {
+        .action(function (issue, input) {
             auth.setConfig(function (auth) {
                 if (auth) {
-                    edit.edit(issue, finalCb);
+		    if(input){
+			edit.editWithInputPutBody(issue, input, finalCb);
+		    } else{
+			edit.edit(issue, input, finalCb);
+		    }
                 }
             });
         });
