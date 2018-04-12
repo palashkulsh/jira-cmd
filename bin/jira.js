@@ -23,8 +23,9 @@ requirejs([
     '../lib/jira/link',
     '../lib/jira/watch',
     '../lib/jira/add_to_sprint',
-    '../lib/jira/new'
-], function (program, config, auth, ls, describe, assign, comment, create, sprint, transitions, worklog, link, watch, add_to_sprint, new_create) {
+    '../lib/jira/new',
+    '../lib/jira/edit'
+], function (program, config, auth, ls, describe, assign, comment, create, sprint, transitions, worklog, link, watch, add_to_sprint, new_create, edit) {
 
     function finalCb(err) {
       if(err){
@@ -114,6 +115,17 @@ requirejs([
             auth.setConfig(function (auth) {
                 if (auth) {
                     transitions.invalid(issue);
+                }
+            });
+        });
+
+    program
+        .command('edit <issue>')
+        .description('edit issue.')
+        .action(function (issue) {
+            auth.setConfig(function (auth) {
+                if (auth) {
+                    edit.edit(issue, finalCb);
                 }
             });
         });
