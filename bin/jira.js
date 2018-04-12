@@ -128,7 +128,7 @@ requirejs([
 		    if(input){
 			edit.editWithInputPutBody(issue, input, finalCb);
 		    } else{
-			edit.edit(issue, input, finalCb);
+			edit.edit(issue, finalCb);
 		    }
                 }
             });
