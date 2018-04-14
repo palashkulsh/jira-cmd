@@ -303,9 +303,28 @@ This jira edit functionality is in beta phase and only few type of fields are al
 		* <kbd>key</kbd> : actual key to which call is made to edit
 		* <kbd>default</kbd> : if input value is not given corresponding to a key , for eg.  <kbd>jira edit JRA-354 `alias_for_label`</kbd> , then it picks this default key from config.json as though the input was given from commandline. It would act as if the command issued was <kbd>jira edit JRA-354 "`alias_for_label`::t1,t2"</kbd>
   * **remember that enties in <kbd>__default</kbd> should be of form <kbd>alias: {...actual json.. }</kbd>**
+  
+### Jira mark functionality to mark a jira as done,blocked, invalid etc <kbd>jira mark JRA-123</kbd>
+There are multiple other jira transitions beside done,invalid,start,stop etc which are directly supported as <kbd>jira done JRA-123</kbd> or <kbd>jira invalid JRA-786</kbd> etc. 
+  * Sometimes some jira do not change transition into these states directly due to defined workflow. They can go into certain states only from current state. In these cases or in general you can use **jira mark** functionality. It works as follows <kbd>jira mark CART-2047</kbd>
+
+	``` json
+	$> jira mark JRA-2047
+	(71) Blocked
+	(91) Invalid
+	(141) Done(No Prod Deply)
+	(181) Wontfix
+	(251) Duplicate
+	(291) Partner Issue
+	(301) Other tech team issue
+	(241) Reopen
+	Enter transition 251
+		
+	```
+  * Above mentioned input would mark the task JRA-2047 as duplicate.
 #### How to know the fields metadata for a project/rapidboard
   * Fill your jira link and project name in link given below
-	* `https://YOUR_JIRA_LINK/rest/api/2/issue/createmeta?projectKeys=YOUR_PROJECT&expand=projects.issuetypes.fields&`
+	* <https://YOUR_JIRA_LINK/rest/api/2/issue/createmeta?projectKeys=YOUR_PROJECT&expand=projects.issuetypes.fields&>
   * Now you have to find the fields for which you want to save the default values.
   * Save the `project` and `issueType` at the root level inside your KEY or alias you choose, for Eg. KEY1 in our case.
   * now create a default key with object of values corresponding values you want to set as default.
@@ -315,6 +334,7 @@ This jira edit functionality is in beta phase and only few type of fields are al
 	*  <https://developer.atlassian.com/jiradev/jira-apis/about-the-jira-rest-apis/jira-rest-api-tutorials/jira-rest-api-examples#JIRARESTAPIexamples-Creatinganissueusingcustomfields>
   *  If you are not able to create a template
  
+
 ### Using Jira JQL
 
   *	get issues for jql eg. <kbd>jira jql "YOUR_JQL_OR_JQL_SHORTCUT"</kbd> when using a particular jql frequently , you can save that jql in **~/.jira/config.json**,an example jql is saved there with key reported
