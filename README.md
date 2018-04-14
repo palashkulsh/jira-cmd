@@ -362,8 +362,7 @@ Usage: sprint [options]
     -a, --add <projIssue>       Add project issue to sprint
     -i, --sprintId <sprintId>   Id of the sprint
     -j, --jql <jql>             Id of the sprint
-
-
+  * Suppose you want to move all of your pending issues which are present in previous sprint and not marked done . Given that `customfield_10007` corresponds to sprint. following <kbd>jira jql -c "cf[10007]=1787 and assignee=aman6.jain and status not in ('invalid','done')"</kbd> gives the issues which are not done in sprint with id 1787 . now you can use this jql to mark them moved to new sprint as <kbd>jira sprint -i 1890 -j "cf[10007]=1787 and assignee=aman6.jain and status not in ('invalid','done')"</kbd> . And all issues would move to sprint with id 1890.
 ### searching issues
 if you want to search a text in all the issues 
   * **using jira search** <kbd>jira jql search SEARCH_TERM</kbd>
