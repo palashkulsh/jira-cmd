@@ -27,7 +27,6 @@ Then, in your shell type:
     $ npm install -g cmd-jira
 
 ## Usage
-
 ##### First use
 
     $ jira
@@ -89,7 +88,6 @@ This save your credentials (base64 encoded) in your `$HOME/.jira` folder.
 
 
 ### Using jira new functionality
-
 #### What does jira new offers
   * if you make issues very frequently then you can save multiple templates of default values with a key to call with in ~/jira/config.json . then you just have to do <kbd>jira new KEY1</kbd>
 	* 
@@ -137,7 +135,174 @@ This save your credentials (base64 encoded) in your `$HOME/.jira` folder.
 	*  `__always_ask` : it contains the fields which would always be prompted when you create an issue. For eg. in above given json , whenever we'll create a new issue , description and priority would always be asked along with other mandatory fields for the board.
 	*  Rest of the keys in `default_create` are the shortcut keys which you will refer to while calling <kbd>jira new key</kbd>
 
+### Using jira edit functionality
+This jira edit functionality is in beta phase and only few type of fields are allowed to be edited. **currently only items of type strings  are supported**
+  * <kbd>jira edit JRA-254</kbd>
+	``` json
+  (0) Summary
+  (1) Issue Type
+  (2) Component/s
+  (3) Dev Estimate
+  (4) Description
+  (5) Fix Version/s
+  (6) Priority
+  (7) Labels
+  (8) Code Reviewer
+  (9) Sprint
+  (10) Epic Link
+  (11) Attachment
+  (12) Depn Team
+  (13) CC
+  (14) Due Date
+  (15) Linked Issues
+  (16) Comment
+  (17) Assignee
+  enter Input 7
+  labels
+  Enter value testlabel1,testlabel2
+  Issue edited successfully!
 
+	```
+
+  * to edit jira in non interactive mode, giving field to be edited and its values is possible. 
+	* you first  need to find the actual name of the field you want to edit. For this you can use the following url <https://YOUR__JIRA__ENDPOINT/rest/api/2/issue/JRA-546/editmeta> **replace JRA-546 with the issue/type of issues you want to edit**. Its sample output is given below
+
+	```		
+  fields{	
+	  summary	{…}
+	  issuetype	{…}
+	  components	{…}
+	  customfield_12000	{…}
+	  description	{…}
+	  fixVersions	{…}
+	  priority	{…}
+	  labels {
+		required	false
+		schema	{
+			type	"array"
+			items	"string"
+			system	"labels"
+		}
+		name	"Labels"
+		autoCompleteUrl	"https://jira.mypaytm.com….0/labels/suggest?query="
+		operations	[…]
+	  }
+	  customfield_11600	{…}
+	  customfield_10007	{…}
+	  customfield_10008	{…}
+	  attachment	{…}
+	  customfield_11901	{…}
+	  customfield_10901	{…}
+	  duedate	{…}
+	  issuelinks	{…}
+	  comment	{…}
+	  assignee	{…}
+    }
+	```
+  * 
+ <kbd>jira edit JRA-254 "FIELD_NAME::FIELDVALUES"</kbd>
+	 * Fieldnames can be hard to remember when using on command line, so you can save these field names in `~/.jira/config.json` . Suppose the response of edit meta is 
+
+	``` json
+	 fields	{
+		summary	{…}
+		issuetype	{…}
+		components	{…}
+		customfield_12000	{…}
+		description	{…}
+		fixVersions	{…}
+		priority	{
+			required	false
+			schema	{
+				type	"priority"
+				system	"priority"
+			}
+			name	"Priority"
+			operations	[…]
+			allowedValues	{
+			0	{
+				self	"https://jira.mypaytm.com/rest/api/2/priority/1"
+				iconUrl	"https://jira.mypaytm.com…/priorities/critical.svg"
+				name	"Highest"
+				id	"1"
+				},
+			1	{
+				self	"https://jira.mypaytm.com/rest/api/2/priority/2"
+				iconUrl	"https://jira.mypaytm.com…cons/priorities/high.svg"
+				name	"High"
+				id	"2"
+				}
+			2	{,
+				self	"https://jira.mypaytm.com/rest/api/2/priority/3"
+				iconUrl	"https://jira.mypaytm.com…ns/priorities/medium.svg"
+				name	"Medium"
+				id	"3"
+				},
+			3	{
+				self	"https://jira.mypaytm.com/rest/api/2/priority/4"
+				iconUrl	"https://jira.mypaytm.com…icons/priorities/low.svg"
+				name	"Low"
+				id	"4"
+				},
+			4	{
+				self	"https://jira.mypaytm.com/rest/api/2/priority/5"
+				iconUrl	"https://jira.mypaytm.com…ns/priorities/lowest.svg"
+				name	"Lowest"
+				id	"5"
+				}
+			5	{…}
+			6	{…}
+			7	{…}
+			8	{…}
+			9	{…}
+		}
+		labels	{…}
+		customfield_11600	{…}
+		customfield_10007	{…}
+		customfield_10008	{…}
+		attachment	{…}
+		customfield_11901	{…}
+		customfield_10901	{…}
+		duedate	{…}
+		issuelinks	{…}
+		comment	{…}
+		assignee	{…}
+	}
+	
+	```
+	 
+  * In above meta priority corresponds to CC field. So settign its default value in config.json would be
+
+  ``` json
+    "edit_meta": {
+		"__default": { <!-- would work like "jira CART-2047 alias_for_high" would change the priority of task to high -->
+			"alias_for_high": {
+				"fields": {
+					"priority": {
+						"id": "2"
+					}
+				}
+			}
+		},
+		"sprint": {
+			"key": "customfield_10007"
+		},
+		"alias_for_label": { <!-- would work "jira edit CART-2047 alias_for_label::label1,label2" -->
+			"key": "labels",
+			"default": {
+				"test1": "t1,t2"
+			}
+		}
+	},
+
+  ```
+
+  * entries in edit_meta are as follows
+	* <kbd>__default</kbd> : corresponds to raw put body we can put in config.json, which is passed as it is to the put call to jira edit api.
+	* Other keys at the level of <kbd>__default</kbd> are alias for fields which can be used as shortform for bigger named keys. Eg. <kbd>jira edit JRA-546 "sprint::123"</kbd>  would first  check alias for key sprint in `edit_meta` , if found it picks the `key` field from the alias. and makes a put call corresponding to the actual key that has been stored.
+		* <kbd>key</kbd> : actual key to which call is made to edit
+		* <kbd>default</kbd> : if input value is not given corresponding to a key , for eg.  <kbd>jira edit JRA-354 `alias_for_label`</kbd> , then it picks this default key from config.json as though the input was given from commandline. It would act as if the command issued was <kbd>jira edit JRA-354 "`alias_for_label`::t1,t2"</kbd>
+  * **remember that enties in <kbd>__default</kbd> should be of form <kbd>alias: {...actual json.. }</kbd>**
 #### How to know the fields metadata for a project/rapidboard
   * Fill your jira link and project name in link given below
 	* `https://YOUR_JIRA_LINK/rest/api/2/issue/createmeta?projectKeys=YOUR_PROJECT&expand=projects.issuetypes.fields&`
