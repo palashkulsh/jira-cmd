@@ -176,12 +176,12 @@ requirejs([
         });
 
     program
-        .command('link <from> <to>')
+        .command('link <from> <to> [link_value]')
         .description('link issues')
-        .action(function (from, to, options) {
+        .action(function (from, to, link_value, options) {
             auth.setConfig(function (auth) {
                 if (auth) {
-                    link(from, to, options, finalCb);
+                    link(from, to, link_value, options, finalCb);
                 }
             });
         });
