@@ -333,10 +333,6 @@ requirejs([
                 }
             });
         });
-<<<<<<< HEAD
-
-=======
->>>>>>> syncing-masters-for-pr
 
     program
         .command('new [key]')
