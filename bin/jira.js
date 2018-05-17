@@ -5,6 +5,7 @@ var requirejs = require('requirejs');
 // https://developer.atlassian.com/jiradev/jira-apis/about-the-jira-rest-apis/jira-rest-api-tutorials/jira-rest-api-examples#JIRARESTAPIexamples-Creatinganissueusingcustomfields
 // required fields https://jira.mypaytm.com/rest/api/2/issue/createmeta?projectKeys=MDO&expand=projects.issuetypes.fields&
 //http://localhost:8080/rest/api/2/issue/JRA-13/editmeta
+
 requirejs.config({
     baseUrl: __dirname
 });
@@ -332,7 +333,10 @@ requirejs([
                 }
             });
         });
+<<<<<<< HEAD
 
+=======
+>>>>>>> syncing-masters-for-pr
 
     program
         .command('new [key]')
