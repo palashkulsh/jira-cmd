@@ -5,6 +5,7 @@ var requirejs = require('requirejs');
 // https://developer.atlassian.com/jiradev/jira-apis/about-the-jira-rest-apis/jira-rest-api-tutorials/jira-rest-api-examples#JIRARESTAPIexamples-Creatinganissueusingcustomfields
 // required fields https://jira.project.com/rest/api/2/issue/createmeta?projectKeys=MDO&expand=projects.issuetypes.fields&
 //http://localhost:8080/rest/api/2/issue/JRA-13/editmeta
+//https://developer.atlassian.com/cloud/jira/platform/rest/?_ga=2.65824493.216125036.1527078092-1211589506.1521805028#d2e1316
 requirejs.config({
     baseUrl: __dirname
 });
@@ -121,22 +122,6 @@ requirejs([
         });
 
     program
-<<<<<<< HEAD
-        .command('edit <issue> [input]')
-        .description('edit issue.')
-        .action(function (issue, input) {
-            auth.setConfig(function (auth) {
-                if (auth) {
-		    if(input){
-			edit.editWithInputPutBody(issue, input, finalCb);
-		    } else{
-			edit.edit(issue, finalCb);
-		    }
-                }
-            });
-        });
-
-=======
         .command('mark <issue>')
         .description('Mark issue as.')
         .action(function (issue) {
@@ -147,7 +132,6 @@ requirejs([
             });
         });
     
->>>>>>> eb72397... generic transitions
     program
         .command('running')
         .description('List issues in progress.')
@@ -235,23 +219,25 @@ requirejs([
     program
         .command('comment <issue> [text]')
         .description('Comment an issue.')
-        .action(function (issue, text) {
+	.option('-i, --interactive ','give multiline comment',String)
+        .action(function (issue, text, options) {
             auth.setConfig(function (auth) {
                 if (auth) {
                     if (text) {
-                      //replace name in comment text if present in user_alias config
-                      //if vikas is nickname stored in user_alias config for vikas.sharma
-                      //then 'vikas has username [~vikas] [~ajitk] [~mohit] becomes 'vikas has username [~vikas.sharma] [~ajitk] [~mohit]
-                      //names which do not match any alias are not changed
-                      text = text.replace(/\[~(.*?)\]/g,function(match, tag, index){
-                        if(config.user_alias[tag]){
-                          return '[~'+config.user_alias[tag]+']';
-                        } else {
-                          return tag;
-                        }
-                      });
                         comment.to(issue, text);
-                    } else {
+                    } if(options.interactive){
+			console.log('Write your comment and press Ctrl+D:\n');
+			process.stdin.resume();
+			process.stdin.setEncoding("utf-8");
+			var stdin_input = "";
+			process.stdin.on("data", function (input) {
+			    stdin_input += input;
+			});
+			process.stdin.on("end", function () {
+			    console.log('\nPosting your comment. Please wait');
+			    comment.to(issue,stdin_input);
+			});
+		    }else {
                         comment.show(issue);
                     }
                 }
