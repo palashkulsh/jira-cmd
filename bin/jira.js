@@ -367,9 +367,9 @@ requirejs([
     .option('-c, --clear', 'Clear stored configuration')
     .action(function (options) {
       if (options.clear) {
-        auth.clearConfig();
+        auth.clearConfig(finalCb);
       } else {
-        auth.setConfig();
+        auth.setConfig(finalCb);
       }
     }).on('--help', function () {
       console.log('  Config Help:');
