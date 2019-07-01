@@ -38,8 +38,9 @@ requirejs([
   function finalCb(err) {
     if(err){
       console.log(err.toString());
+      process.exit(1);
     }
-    process.exit(1);
+    process.exit(0);
   }
 
   program
