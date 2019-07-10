@@ -1,7 +1,7 @@
 {
-  "name": "cmd-jira",
+  "name": "jira-cmd",
   "description": "Another JIRA Command Line Interface",
-  "version": "0.7.9",
+  "version": "0.8.0",
   "author": "Germán Robledo <germanrcuriel@gmail.com>",
   "contributors": [
     {
@@ -27,7 +27,8 @@
     "openurl": "^1.1.0",
     "qs": "~> 1.0.0",
     "requirejs": "~2.1.5",
-    "superagent": "~0.13.0"
+    "superagent": "~0.13.0",
+    "jsonpath": "^1.0.2"
   },
   "engines": {
     "node": ">= 0.8"
@@ -43,7 +44,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/palashkulsh/jira-cmd.git"
+    "url": "git://github.com/germanrcuriel/jira-cmd.git"
   },
   "bin": {
     "jira": "./bin/jira.js"
