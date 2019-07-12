@@ -426,6 +426,48 @@ if you want to search a text in all the issues
   * **default_create** : now this is part of the jira new functionality, in which you can configure templates in config.json, so when you create a new jira, default values are picked from templates and other required fields or fields which you have declared mandatory are prompted for your input.
   * **edit_meta**
   * **options**
+  	* `list_issues_columns`: definitions of the columns used in displaying the issues with `jira ls` or `jira list`. Default columns are Key, Priority, Summary and Status. Keys are the column headers. Values are object with:
+		* `jsPath` the path in the JSON of an issue (returned by a call to `rest/api/2/search?jql=assignee=currentUser()`, example given in [Using jira edit functionality](#Using-jira-edit-functionality))
+		* `defaultValue` (optional) if the field is not present or its value is equivalent to false (zero, null or ""), the default value will be used instead
+		* `isDate` (optional) mark that the value is a date and should be formatted accordingly
+		* `isDuration` (optional) mark that the value is a duration (like 2h or 3d) and should be formatted accordingly
+		* `truncate` (optional) length that string values should not exceed. If they do they'll be truncated.
+
+	```json
+	    "list_issues_columns": {
+	      "Key": {
+	        "jsPath": "key"
+	      },
+	      "Priority": {
+	        "jsPath": "fields.priority.name",
+	        "defaultValue": ""
+	      },
+	      "Summary": {
+	        "jsPath": "fields.summary",
+	        "truncate": 50
+	      },
+	      "Status": {
+	        "jsPath": "fields.status.name"
+	      },
+	      "Estimate": {
+	        "jsPath": "fields.progress.total",
+	        "isDuration": true
+	      },
+	      "Logged": {
+	        "jsPath": "fields.progress.progress",
+	        "isDuration": true
+	      },
+	      "Created": {
+	        "jsPath": "fields.created",
+		    "isDate": true
+	      }
+	    }
+	```
+
+	* `work_hours_in_day`: number of hours in the working days as setup in JIRA.
+
+
+
 
 Each command have individual usage help (using --help or -h)
 
