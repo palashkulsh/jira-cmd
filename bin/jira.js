@@ -1,5 +1,11 @@
 #!/usr/bin/env node
 
+// See: https://github.com/nodejs/node/issues/6456
+[process.stdout, process.stderr].forEach((s) => {
+  s && !s.isTTY && s._handle && s._handle.setBlocking &&
+  s._handle.setBlocking(true)
+})
+
 var requirejs = require('requirejs');
 // https://docs.atlassian.com/jira/REST/server/?_ga=2.55654315.1871534859.1501779326-1034760119.1468908320#api/2/issueLink-linkIssues
 // https://developer.atlassian.com/jiradev/jira-apis/about-the-jira-rest-apis/jira-rest-api-tutorials/jira-rest-api-examples#JIRARESTAPIexamples-Creatinganissueusingcustomfields
@@ -44,13 +50,14 @@ requirejs([
     .description('List my issues')
     .option('-p, --project <name>', 'Filter by project', String)
     .option('-t, --type <name>', 'Filter by type', String)
+    .option('-j, --json <value>', 'Output in json', String, 0)
     .action(function (options) {
       auth.setConfig(function (auth) {
         if (auth) {
           if (options.project) {
-            ls.showByProject(options.project, options.type, finalCb);
+            ls.showByProject(options, finalCb);
           } else {
-            ls.showAll(options.type, finalCb);
+            ls.showAll(options, finalCb);
           }
         }
       });
