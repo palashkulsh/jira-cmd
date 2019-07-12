@@ -50,13 +50,14 @@ requirejs([
     .description('List my issues')
     .option('-p, --project <name>', 'Filter by project', String)
     .option('-t, --type <name>', 'Filter by type', String)
+    .option('-j, --json <value>', 'Output in json', String, 0)
     .action(function (options) {
       auth.setConfig(function (auth) {
         if (auth) {
           if (options.project) {
-            ls.showByProject(options.project, options.type, finalCb);
+            ls.showByProject(options, finalCb);
           } else {
-            ls.showAll(options.type, finalCb);
+            ls.showAll(options, finalCb);
           }
         }
       });
