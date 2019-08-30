@@ -40,6 +40,7 @@ requirejs([
       console.log(err.toString());
       process.exit(1);
     }
+    process.exit(0);
   }
 
   program
