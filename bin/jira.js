@@ -130,12 +130,12 @@ requirejs([
     });
 
   program
-    .command('mark <issue>')
+    .command('mark <issue> [value]')
     .description('Mark issue as.')
-    .action(function (issue) {
+    .action(function (issue, value) {
       auth.setConfig(function (auth) {
         if (auth) {
-          transitions.makeTransition(issue, finalCb);
+          transitions.makeTransition(issue, value, finalCb);
         }
       });
     });
