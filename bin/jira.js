@@ -350,8 +350,8 @@ requirejs([
     .option('-p, --project <project>', 'Rapid board on which project is to be created', String)
     .option('-P, --priority <priority>', 'priority of the issue', String)
     .option('-T --type <type>', 'Issue type', String)
-    .option('-s --subtask <subtask>', 'Issue subtask', String)
-    .option('-t --title <title>', 'Issue title', String)
+    .option('-S --subtask <subtask>', 'Issue subtask', String)
+    .option('-s --summary <summary>', 'Issue title/summary', String)
     .option('-d --description <description>', 'Issue description', String)
     .option('-a --assignee <assignee>', 'Issue assignee', String)
     .action(function (key, options) {      
