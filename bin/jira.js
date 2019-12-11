@@ -141,7 +141,7 @@ requirejs([
     });
   
   program
-    .command('edit <issue> [input]')
+    .command('edit <issue> [input in the form field_name::field_value]')
     .description('edit issue.')
     .action(function (issue, input) {
       auth.setConfig(function (auth) {
