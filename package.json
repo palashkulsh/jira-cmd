@@ -44,7 +44,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/germanrcuriel/jira-cmd.git"
+    "url": "git://github.com/palashkulsh/jira-cmd.git"
   },
   "bin": {
     "jira": "./bin/jira.js"
