@@ -9,7 +9,7 @@
 var requirejs = require('requirejs');
 // https://docs.atlassian.com/jira/REST/server/?_ga=2.55654315.1871534859.1501779326-1034760119.1468908320#api/2/issueLink-linkIssues
 // https://developer.atlassian.com/jiradev/jira-apis/about-the-jira-rest-apis/jira-rest-api-tutorials/jira-rest-api-examples#JIRARESTAPIexamples-Creatinganissueusingcustomfields
-// required fields https://jira.mypaytm.com/rest/api/2/issue/createmeta?projectKeys=MDO&expand=projects.issuetypes.fields&
+// required fields https://jira.com/rest/api/2/issue/createmeta?projectKeys=BOARD&expand=projects.issuetypes.fields&
 //http://localhost:8080/rest/api/2/issue/JRA-13/editmeta
 //https://developer.atlassian.com/cloud/jira/platform/rest/?_ga=2.65824493.216125036.1527078092-1211589506.1521805028#d2e1316
 requirejs.config({
