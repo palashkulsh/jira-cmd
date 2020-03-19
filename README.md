@@ -184,7 +184,7 @@ This jira edit functionality is in beta phase and only few type of fields are al
 			system	"labels"
 		}
 		name	"Labels"
-		autoCompleteUrl	"https://jira.mypaytm.com….0/labels/suggest?query="
+		autoCompleteUrl	"https://jira.com….0/labels/suggest?query="
 		operations	[…]
 	  }
 	  customfield_11600	{…}
@@ -221,32 +221,32 @@ This jira edit functionality is in beta phase and only few type of fields are al
 			operations	[…]
 			allowedValues	{
 			0	{
-				self	"https://jira.mypaytm.com/rest/api/2/priority/1"
-				iconUrl	"https://jira.mypaytm.com…/priorities/critical.svg"
+				self	"https://jira.com/rest/api/2/priority/1"
+				iconUrl	"https://jira.com…/priorities/critical.svg"
 				name	"Highest"
 				id	"1"
 				},
 			1	{
-				self	"https://jira.mypaytm.com/rest/api/2/priority/2"
-				iconUrl	"https://jira.mypaytm.com…cons/priorities/high.svg"
+				self	"https://jira.com/rest/api/2/priority/2"
+				iconUrl	"https://jira.com…cons/priorities/high.svg"
 				name	"High"
 				id	"2"
 				}
 			2	{,
-				self	"https://jira.mypaytm.com/rest/api/2/priority/3"
-				iconUrl	"https://jira.mypaytm.com…ns/priorities/medium.svg"
+				self	"https://jira.com/rest/api/2/priority/3"
+				iconUrl	"https://jira.com…ns/priorities/medium.svg"
 				name	"Medium"
 				id	"3"
 				},
 			3	{
-				self	"https://jira.mypaytm.com/rest/api/2/priority/4"
-				iconUrl	"https://jira.mypaytm.com…icons/priorities/low.svg"
+				self	"https://jira.com/rest/api/2/priority/4"
+				iconUrl	"https://jira.com…icons/priorities/low.svg"
 				name	"Low"
 				id	"4"
 				},
 			4	{
-				self	"https://jira.mypaytm.com/rest/api/2/priority/5"
-				iconUrl	"https://jira.mypaytm.com…ns/priorities/lowest.svg"
+				self	"https://jira.com/rest/api/2/priority/5"
+				iconUrl	"https://jira.com…ns/priorities/lowest.svg"
 				name	"Lowest"
 				id	"5"
 				}
