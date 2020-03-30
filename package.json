@@ -1,0 +1,52 @@
+{
+  "name": "jira-cmd",
+  "description": "Another JIRA Command Line Interface",
+  "version": "0.8.2",
+  "author": "Germán Robledo <germanrcuriel@gmail.com>",
+  "contributors": [
+    {
+      "name": "Igor Escobar",
+      "email": "blog@igorescobar.com"
+    },
+    {
+      "name": "palash kulshreshtha",
+      "email": "palashkulsh.github.io"
+    }
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "patch-release": "npm version patch && npm publish && git push --follow-tags"
+  },
+  "dependencies": {
+    "alasql": "^0.4.5",
+    "async": "^2.6.0",
+    "cli-table": "^0.2.0",
+    "commander": "~1.1.1",
+    "dargs": "^5.1.0",
+    "moment": "^2.10.2",
+    "openurl": "^1.1.0",
+    "qs": "~> 1.0.0",
+    "requirejs": "~2.1.5",
+    "superagent": "~0.13.0",
+    "jsonpath": "^1.0.2"
+  },
+  "engines": {
+    "node": ">= 0.8"
+  },
+  "keywords": [
+    "jira",
+    "api",
+    "client",
+    "command",
+    "cli",
+    "tool"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/germanrcuriel/jira-cmd.git"
+  },
+  "bin": {
+    "jira": "./bin/jira.js"
+  }
+}
