@@ -1,5 +1,5 @@
 # feel free to open an issue if you are facing any trouble setting up command line utility for jira :)
-
+## we'll be happy to help you set up.
 jira-cmd
 ========
 
