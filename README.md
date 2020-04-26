@@ -1,4 +1,4 @@
-#feel free to open an issue if you are facing any trouble setting up command line utility for jira 
+# feel free to open an issue if you are facing any trouble setting up command line utility for jira 
 
 jira-cmd
 ========
