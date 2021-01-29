@@ -24,7 +24,7 @@ Install [node.js](http://nodejs.org/).
 
 Then, in your shell type:
 
-    $ npm install -g cmd-jira
+    $ npm install -g jira-cmd
 
 ## Usage
 ##### First use
