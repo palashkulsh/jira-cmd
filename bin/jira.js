@@ -214,7 +214,7 @@ requirejs([
       auth.setConfig(function (auth) {
         if (auth) {
           if (user) {
-            user = config.user_alias[user];
+            user = config.user_alias[user] || user;
             assign.to(issue, user);
           } else {
             assign.me(issue);
