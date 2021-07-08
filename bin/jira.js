@@ -44,7 +44,7 @@ requirejs([
   }
 
   program
-    .version('v0.5.4');
+    .version(require('../package.json').version);
 
   program
     .command('ls')
