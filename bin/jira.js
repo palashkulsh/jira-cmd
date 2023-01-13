@@ -1,10 +1,13 @@
 #!/usr/bin/env node
+//process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"
 
 // See: https://github.com/nodejs/node/issues/6456
+
 [process.stdout, process.stderr].forEach((s) => {
   s && !s.isTTY && s._handle && s._handle.setBlocking &&
   s._handle.setBlocking(true)
 })
+
 
 var requirejs = require('requirejs');
 // https://docs.atlassian.com/jira/REST/server/?_ga=2.55654315.1871534859.1501779326-1034760119.1468908320#api/2/issueLink-linkIssues
