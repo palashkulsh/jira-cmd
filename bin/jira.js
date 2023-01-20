@@ -15,6 +15,11 @@ var requirejs = require('requirejs');
 // required fields https://jira.com/rest/api/2/issue/createmeta?projectKeys=BOARD&expand=projects.issuetypes.fields&
 //http://localhost:8080/rest/api/2/issue/JRA-13/editmeta
 //https://developer.atlassian.com/cloud/jira/platform/rest/?_ga=2.65824493.216125036.1527078092-1211589506.1521805028#d2e1316
+
+
+//for newer versions of jira > 8.4
+//http://localhost:8080/rest/api/2/issue/createmeta?projectKeys=JRA&issuetypeNames=Bug&expand=projects.issuetypes.fields
+
 requirejs.config({
   baseUrl: __dirname
 });
