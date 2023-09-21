@@ -40,8 +40,9 @@ requirejs([
   '../lib/jira/watch',
   '../lib/jira/add_to_sprint',
   '../lib/jira/new',
+  '../lib/jira/version_lt_84_new',
   '../lib/jira/edit'
-], function (program, config, auth, ls, describe, assign, comment, create, sprint, transitions, worklog, link, watch, add_to_sprint, new_create, edit) {
+], function (program, config, auth, ls, describe, assign, comment, create, sprint, transitions, worklog, link, watch, add_to_sprint, new_create, lt_84_new_create, edit) {
 
   function finalCb(err) {
     if(err){
@@ -366,7 +367,11 @@ requirejs([
       auth.setConfig(function (auth) {
         if (auth) {
           options.key=key;
-          new_create.create(options, finalCb);
+          if (config && config.jira_api_options && config.jira_api_options.api_version == 'lt_84' ) {
+            lt_84_new_create.create(options, finalCb);
+          } else {
+            new_create.create(options, finalCb);
+          }
         }
       });
     });
