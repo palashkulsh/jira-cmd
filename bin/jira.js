@@ -15,6 +15,11 @@ var requirejs = require('requirejs');
 // required fields https://jira.com/rest/api/2/issue/createmeta?projectKeys=BOARD&expand=projects.issuetypes.fields&
 //http://localhost:8080/rest/api/2/issue/JRA-13/editmeta
 //https://developer.atlassian.com/cloud/jira/platform/rest/?_ga=2.65824493.216125036.1527078092-1211589506.1521805028#d2e1316
+
+
+//for newer versions of jira > 8.4
+//http://localhost:8080/rest/api/2/issue/createmeta?projectKeys=JRA&issuetypeNames=Bug&expand=projects.issuetypes.fields
+
 requirejs.config({
   baseUrl: __dirname
 });
@@ -35,9 +40,10 @@ requirejs([
   '../lib/jira/watch',
   '../lib/jira/add_to_sprint',
   '../lib/jira/new',
+    '../lib/jira/version_lt_8_4_new',
   '../lib/jira/edit'
-], function (program, config, auth, ls, describe, assign, comment, create, sprint, transitions, worklog, link, watch, add_to_sprint, new_create, edit) {
-
+], function (program, config, auth, ls, describe, assign, comment, create, sprint, transitions, worklog, link, watch, add_to_sprint, new_create, lt_84_new_create, edit) {
+    
   function finalCb(err) {
     if(err){
       console.log(err.toString());
@@ -360,8 +366,14 @@ requirejs([
     .action(function (key, options) {      
       auth.setConfig(function (auth) {
         if (auth) {
-          options.key=key;
-          new_create.create(options, finalCb);
+            options.key=key;
+            //call old new function for older jira versions
+            // by default we use gt_84 version
+            if (config && config.jira_api_config && jira_api_config.api_version == 'lt_84') {
+                lt_84_new_create.create(options, finalCb);
+            } else {
+                new_create.create(options, finalCb);
+            }
         }
       });
     });
