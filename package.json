@@ -27,7 +27,7 @@
     "openurl": "^1.1.0",
     "qs": "~> 1.0.0",
     "requirejs": "~2.1.5",
-    "superagent": "~0.13.0",
+    "superagent": "~8.0.8",
     "jsonpath": "^1.0.2"
   },
   "engines": {
