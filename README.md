@@ -31,11 +31,46 @@ Then, in your shell type:
 
     $ jira
     Jira URL: https://jira.atlassian.com/
+    Authentication Type (PASSWORD/TOKEN): PASSWORD
     Username: xxxxxx
     Password: xxxxxx
     Information stored!
 
-This save your credentials (base64 encoded) in your `$HOME/.jira` folder.
+This saves your credentials in your `$HOME/.jira` folder. For PASSWORD authentication type, 
+credentials are stored as base64 encoded username:password. For TOKEN authentication type, 
+the token is stored as-is.
+
+##### Authentication Types
+
+The tool supports two types of authentication:
+
+1. **PASSWORD**: Traditional username/password authentication
+   - Uses Basic Authentication
+   - Requires your Jira username and password
+   - Credentials are stored as base64 encoded username:password pair
+
+2. **TOKEN**: Personal Access Token authentication
+   - Uses Bearer Token Authentication
+   - Requires your Jira username and API token
+   - Useful for accounts with 2FA enabled or when password authentication is disabled
+   - Token is stored as-is and sent as Bearer token
+
+To reconfigure authentication:
+
+    $ jira config
+
+Example configuration in ~/.jira/config.json:
+```json
+{
+  "auth": {
+    "token": "your-token-here",
+    "token_type": "TOKEN",  // or "PASSWORD" for username/password auth
+    "url": "https://jira.atlassian.com/",
+    "user": "your-username"
+  }
+  // ... rest of config
+}
+```
 
 ##### Help
 
